@@ -1,0 +1,9 @@
+<%@ page contentType="text/html;charset=euc-kr"%>
+
+<body>
+<p>
+<a href="ModifyForm.jsp">Á¤º¸¼öÁ¤</a>
+<a href="DeleteForm.jsp">Å»Åð</a>
+</p>
+</body>
+</html>
