@@ -79,6 +79,7 @@
 	   <%} %>
        <input type="button" value="±Û¸ñ·Ï" 
        onclick="document.location.href='list.jsp?pageNum=<%=Q_pageNum%>'">
+       
     </td>
   </tr>
 </table>    

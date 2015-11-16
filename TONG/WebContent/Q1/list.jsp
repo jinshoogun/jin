@@ -43,10 +43,10 @@
 <table width="700">
 <tr>
     <td align="right" b>
-     <%if (session.getAttribute("memId") !=null){%>
+     <%if (session.getAttribute("m_id") !=null){%>
     <a href="writeForm.jsp">글쓰기</a>
     <%} else {%>
-    <a href="/TONG/member/main.jsp">로그인</a>
+    <a href="/TONG/Member/main.jsp">로그인</a>
     <%}%>
     </td>
 </table>
@@ -88,8 +88,8 @@
 	<%}else{%>
 	  <img src="images/level.gif" width="<%=wid%>" height="16">
 	<%}%>
-           
       <a href="content.jsp?q_num=<%=article.getQ_num()%>&q_pageNum=<%=currentPage%>">
+
            <%=article.getQ_subject()%></a> 
           <% if(article.getQ_readcount()>=20){%>
          <img src="images/hot.gif" border="0"  height="16"><%}%> </td>

@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=euc-kr" %>
+<%@ page import = "DATADB.bean.DAO" %>
+<%@ page import = "DATADB.bean.DTO" %>
 <html>
 <head>
 <title>게시판</title>
@@ -14,8 +16,9 @@
 		q_ref=Integer.parseInt(request.getParameter("q_ref"));
 		q_re_step=Integer.parseInt(request.getParameter("q_re_step"));
 		q_re_level=Integer.parseInt(request.getParameter("q_re_level"));
+		
 	}
-  String id = (String)session.getAttribute("memId");
+  String id = (String)session.getAttribute("m_id");
   //getAttribute이 리턴값이 object로 받기 때문에 (String)으로 형 강제변환
 
 %>
@@ -40,7 +43,7 @@
    
     <td  width="70"  align="center">이 름</td>
     <td  width="330">
-       <input type="text" size="10" maxlength="10" name="q_writer"></td>
+       <input type="text" size="10" maxlength="20" name="q_writer"></td>
   </tr>
   <tr>
     <td  width="70"  align="center" >제 목</td>
