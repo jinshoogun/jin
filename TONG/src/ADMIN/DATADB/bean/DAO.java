@@ -84,7 +84,76 @@ public class DAO {
 		        }
 				return x;
 			}
+	public List getArticles(int start, int end) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List articleList=null;
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(
+					"select q_num, q_writer,q_subject,q_password2,q_reg_date,q_ref,q_re_step, q_re_level, q_content,q_readcount,r "
+					+
+					"from (select q_num, q_writer,q_subject, q_password2,q_reg_date, q_ref, q_re_step,q_re_level, q_content, q_readcount,rownum r " +
+					"from (select q_num,q_writer,q_subject, q_password2, q_reg_date,q_ref, q_re_step, q_re_level, q_content, q_readcount " +
+					"from qnA order by q_ref desc, q_re_step asc) order by q_ref desc, q_re_step asc ) where r >= ? and r <= ? ");
+					pstmt.setInt(1, start); 
+					pstmt.setInt(2, end); 
 
+					rs = pstmt.executeQuery();
+					if (rs.next()) {
+						articleList = new ArrayList(end); 
+						do{ 
+							DTO article= new DTO();
+							article.setQ_num(rs.getInt("q_num"));
+							article.setQ_writer(rs.getString("q_writer"));
+							article.setQ_subject(rs.getString("q_subject"));
+							article.setQ_password2(rs.getString("q_password2"));
+							article.setQ_reg_date(rs.getTimestamp("q_reg_date"));
+							article.setQ_readcount(rs.getInt("q_readcount"));
+							article.setQ_ref(rs.getInt("q_ref"));
+							article.setQ_re_step(rs.getInt("q_re_step"));
+							article.setQ_re_level(rs.getInt("q_re_level"));
+							article.setQ_content(rs.getString("q_content"));
+							articleList.add(article); 
+						}while(rs.next());
+					}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+			if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+			if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+		}
+
+		
+		return articleList;
+		
+	}
+	
+	public int getAdminlistCount() throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int x=0;
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement("select count(*) from Administrator");
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				x= rs.getInt(1); 
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+			if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+			if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+		}
+		return x; 
+	}
+	
+	
 	public DTO getAdminlist(String a_id) throws Exception {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -112,9 +181,6 @@ public class DAO {
 		
 		return adminlist;
 	}
-	
-	
-	
 	
 
 	public int ConfirmId(String a_id)  //중복확인 메소드

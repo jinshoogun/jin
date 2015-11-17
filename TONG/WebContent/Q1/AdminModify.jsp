@@ -4,10 +4,18 @@
 <%@ page import = "ADMIN.DATADB.bean.DTO" %>
 <%@ page import = "java.util.List" %>
 
-    <%     int count = 0;
-    List adminlist = null;%>
-    <center><b>관리자 정보입니다. (전체 글:<%=count%>)</b>
-        <%if (count == 0) {
+<%    
+int count = 0;
+List adminlist = null;
+DAO dbPro = DAO.getInstance();
+count = dbPro.getAdminlistCount();
+if (count > 0) {
+	adminlist = dbPro.getAdminlists(startRow, endRow);
+}
+    %>
+<center><b>관리자 정보입니다. (전체 글:<%=count%>)</b>
+        
+        <%if (count == 0) {	
 %>
 <table width="600" border="1" cellpadding="0" cellspacing="0">
 <tr>
