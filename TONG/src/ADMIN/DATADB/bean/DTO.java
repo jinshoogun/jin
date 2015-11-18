@@ -3,12 +3,21 @@ package ADMIN.DATADB.bean;
 import java.sql.Timestamp;
 
 public class DTO {
+	private String a_num;
 	private String a_id;
 	private String a_password; 
 	private String a_name;
 	private String a_email;
 	private String a_birth;
 	private String a_phone;
+	
+	
+	public String getA_num() {
+		return a_num;
+	}
+	public void setA_num(String a_num) {
+		this.a_num = a_num;
+	}
 	public String getA_id() {
 		return a_id;
 	}

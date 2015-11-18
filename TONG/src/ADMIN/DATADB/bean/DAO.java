@@ -32,14 +32,14 @@ public class DAO {
 		try {
 			conn=getConnection();//커넥션 연결
 			//쿼리생성!
-			pstmt = conn.prepareStatement("insert into Administrator values(?,?,?,?,?,?,?,?)");
-			
-			pstmt.setString(1, admin.getA_id());
-			pstmt.setString(2, admin.getA_password());
-			pstmt.setString(3, admin.getA_name());
-			pstmt.setString(4, admin.getA_email());
-			pstmt.setString(5, admin.getA_birth());
-			pstmt.setString(6, admin.getA_phone());
+			pstmt = conn.prepareStatement("insert into Administrator values(?,?,?,?,?,?,?,?,?)");
+			pstmt.setString(1, admin.getA_num());
+			pstmt.setString(2, admin.getA_id());
+			pstmt.setString(3, admin.getA_password());
+			pstmt.setString(4, admin.getA_name());
+			pstmt.setString(5, admin.getA_email());
+			pstmt.setString(6, admin.getA_birth());
+			pstmt.setString(7, admin.getA_phone());
 			pstmt.executeQuery();
 		} catch (Exception e) { //예외처리
 			e.printStackTrace();
@@ -84,38 +84,27 @@ public class DAO {
 		        }
 				return x;
 			}
-	public List getArticles(int start, int end) throws Exception {
+	public List getAdminlists(int start, int end) throws Exception {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		List articleList=null;
+		List adminList=null;
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(
-					"select q_num, q_writer,q_subject,q_password2,q_reg_date,q_ref,q_re_step, q_re_level, q_content,q_readcount,r "
-					+
-					"from (select q_num, q_writer,q_subject, q_password2,q_reg_date, q_ref, q_re_step,q_re_level, q_content, q_readcount,rownum r " +
-					"from (select q_num,q_writer,q_subject, q_password2, q_reg_date,q_ref, q_re_step, q_re_level, q_content, q_readcount " +
-					"from qnA order by q_ref desc, q_re_step asc) order by q_ref desc, q_re_step asc ) where r >= ? and r <= ? ");
+					"select * from Administrator where a_num >= ? and a_num <= ? order by a_num asc");
 					pstmt.setInt(1, start); 
 					pstmt.setInt(2, end); 
 
 					rs = pstmt.executeQuery();
 					if (rs.next()) {
-						articleList = new ArrayList(end); 
+						adminList = new ArrayList(end); 
 						do{ 
-							DTO article= new DTO();
-							article.setQ_num(rs.getInt("q_num"));
-							article.setQ_writer(rs.getString("q_writer"));
-							article.setQ_subject(rs.getString("q_subject"));
-							article.setQ_password2(rs.getString("q_password2"));
-							article.setQ_reg_date(rs.getTimestamp("q_reg_date"));
-							article.setQ_readcount(rs.getInt("q_readcount"));
-							article.setQ_ref(rs.getInt("q_ref"));
-							article.setQ_re_step(rs.getInt("q_re_step"));
-							article.setQ_re_level(rs.getInt("q_re_level"));
-							article.setQ_content(rs.getString("q_content"));
-							articleList.add(article); 
+							DTO adminlist= new DTO();
+							adminlist.setA_num(rs.getString("a_num"));
+							adminlist.setA_id(rs.getString("a_id"));
+							adminlist.setA_name(rs.getString("a_name"));
+							adminList.add(adminlist); 
 						}while(rs.next());
 					}
 		} catch(Exception ex) {
@@ -127,7 +116,7 @@ public class DAO {
 		}
 
 		
-		return articleList;
+		return adminList;
 		
 	}
 	
@@ -183,28 +172,15 @@ public class DAO {
 	}
 	
 
-	public int ConfirmId(String a_id)  //중복확인 메소드
-	 throws Exception {
+	public void DeleteAdmin(int a_num) throws Exception {
 		 Connection conn = null;
 		 PreparedStatement pstmt= null;
 		 ResultSet rs = null;
-		 String dbpasswd="";
-		 int x=-1;
-		 
 		 try {
 			 conn = getConnection();  //커넥션 연결
-			 
-			 pstmt = conn.prepareStatement("select a_id from Administrator where a_id =?");
-			                               //ID를 입력하고 그에해당하는 ID를 가져옴.
-			 
-			 pstmt.setString(1, a_id);
-			
+			 pstmt = conn.prepareStatement("delete from Administrator where a_num=?");
+			 pstmt.setInt(1, a_num);
 			 rs=pstmt.executeQuery();
-			 
-			 if(rs.next()) //rs에 저장된 결과가 있으면 if문실행 없으면 else문 실행
-				 x=1; //해당아이디 있음
-			 else
-				 x=-1; //해당아이디없음
 			 
 		 }catch(Exception ex) {
 			 ex.printStackTrace();
@@ -213,45 +189,42 @@ public class DAO {
 	            if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
 	            if (conn != null) try { conn.close(); } catch(SQLException ex) {}
 		 }
-		 return x;
-		 
 	 }
 	
 		    
-	public int deleteMembership (String a_id,String a_password)
-	     throws Exception {
-		 Connection conn = null;
-	        PreparedStatement pstmt = null;
-	        ResultSet rs= null;
-	        String dbpasswd="";
-	        int x=-1;
-	        try {
-				conn = getConnection();  //커넥션 연결
-	            pstmt = conn.prepareStatement("select a_password from Administrator where a_id = ?");
-	            //쿼리 생성, 해당하는 아이디에 맞는 pw를 가져온다 -> dbpasswd변수에 대입한다.
-	            pstmt.setString(1, a_id);
-	            rs = pstmt.executeQuery();
-				if(rs.next()){
-					dbpasswd= rs.getString("m_password"); 
-					System.out.println(a_password + dbpasswd);
-					if(dbpasswd.equals(a_password)){  //equals 함수를 사용해서 퀴리문을 통해 가져온dbpassword와 pw를 비교하여 동일하면 delete문 실행
-						pstmt = conn.prepareStatement(
-	            	      "delete from Administrator where a_id=?");
-	                    pstmt.setString(1, a_id);
-	                    pstmt.executeUpdate();
-						x= 1; //회원탈퇴 성공
-					}else
-						x= 0; //비밀번호 틀림
-				}
-	        } catch(Exception ex) {
-	            ex.printStackTrace();
-	        } finally {
-	            if (rs != null) try { rs.close(); } catch(SQLException ex) {}
-	            if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
-	            if (conn != null) try { conn.close(); } catch(SQLException ex) {}
-	        }
-			return x;
-	    }
+	public DTO updateGetAdmin(int a_num) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		DTO admin =null;
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(
+			"select * from Administrator where a_num = ?"); 
+			pstmt.setInt(1, a_num);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				admin = new DTO();
+				admin.setA_num(rs.getString("a_num"));
+				admin.setA_id(rs.getString("a_id"));
+				admin.setA_password(rs.getString("a_password"));
+				admin.setA_name(rs.getString("a_name"));
+				admin.setA_email(rs.getString("a_email"));
+				admin.setA_birth(rs.getString("a_birth"));
+				admin.setA_phone(rs.getString("a_phone"));
+				
+		
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+			if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+			if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+		}
+
+		return admin;
+	}
 }
 
 
