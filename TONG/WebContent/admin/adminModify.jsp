@@ -1,24 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
-<%@ page import="ADMIN.DATADB.bean.DAO"%>
-<%@ page import="ADMIN.DATADB.bean.DTO"%>
+<%@ page import="adminDATADB.bean.DAO"%>
+<%@ page import="adminDATADB.bean.DTO"%>
 <%@ page import="java.util.List"%>
 <html>
 <head>
-<script>
-
-
-function checkIt(){
-	var re = confirm("계정을 삭제하겠습니까?");
-	if (re){
-		alert("계정이 삭제되었습니다."); 
-		
-	  } 
-	  else {
-	  alert("계정삭제가 취소 되었습니다.");
-	    }
-	}
-	  </script>
 <%
 	int numSize = 15;
 	String a_num = request.getParameter("a_num");
@@ -61,9 +47,7 @@ function checkIt(){
 			<td align="center" width="150">추 가</td>
 			<td align="center" width="150">삭 제</td>
 		</tr>
-
 		<%
-
 			for (int i = 0; i < adminList.size(); i++) {
 					DTO admin = (DTO) adminList.get(i);
 		%>
@@ -71,15 +55,22 @@ function checkIt(){
 			<td align="center" width="100"><%=admin.getA_num()%></td>
 			<td align="center" width="100"><%=admin.getA_id()%></td>
 			<td align="center" width="150"><%=admin.getA_name()%></td>
-			<td align="center"><input type="button" value="정보 수정" onclick="document.location.href='AdminModifyFrom.jsp?q_num=<%=admin.getA_num()%>'"></td>
-			<td align="center"><input type="button" value="계정 삭제" onclick="window.location='adminDelete.jsp?a_num=<%=admin.getA_num()%>'" /></td>
+			<td align="center"><input type="button" value="정보 수정"
+				onclick="document.location.href='adminModifyFrom.jsp?a_num=<%=admin.getA_num()%>'"></td>
+			<td align="center"><input type="button" value="계정 삭제"
+				onclick="window.location='adminDelete.jsp?a_num=<%=admin.getA_num()%>'" /></td>
 		</tr>
 
 		<%
 			}
 			}
 		%>
-		
-		
-		
-		
+	</table>
+	<table>
+		<tr>
+			<td align="right"><input type="button" value="추가"
+				onclick="window.location='adminAdd.jsp'"></td>
+		    <td align="right"><input type="button" value="이전"
+				onclick="window.location='main.jsp'"></td>
+		</tr>
+	</table>

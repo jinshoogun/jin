@@ -1,4 +1,4 @@
-package ADMIN.DATADB.bean;
+package adminDATADB.bean;
 
 import java.sql.Timestamp;
 

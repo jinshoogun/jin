@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
-<%@ page import="ADMIN.DATADB.bean.DAO"%>
+<%@ page import="adminDATADB.bean.DAO"%>
 
 <% request.setCharacterEncoding("euc-kr");%>
 

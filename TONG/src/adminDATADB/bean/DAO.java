@@ -1,10 +1,11 @@
-package ADMIN.DATADB.bean;
+package adminDATADB.bean;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.sql.*;
 import javax.naming.*;
+import java.text.NumberFormat;
 
 
 public class DAO {
@@ -24,23 +25,34 @@ public class DAO {
 		DataSource ds = (DataSource)envCtx.lookup("jdbc/orcl");  //자바로된 부분중에 jdbc로된걸 찾는다.고정된이름이라 외어야함
 		return ds.getConnection();
 	}
-	
 	//insert()메소드
-	public void insertAdmin(DTO admin){
+	public void insertAdmin(){
 		Connection conn =null;
 		PreparedStatement pstmt = null;
+		ResultSet rs= null;
+		
+
 		try {
-			conn=getConnection();//커넥션 연결
-			//쿼리생성!
-			pstmt = conn.prepareStatement("insert into Administrator values(?,?,?,?,?,?,?,?,?)");
-			pstmt.setString(1, admin.getA_num());
-			pstmt.setString(2, admin.getA_id());
-			pstmt.setString(3, admin.getA_password());
-			pstmt.setString(4, admin.getA_name());
-			pstmt.setString(5, admin.getA_email());
-			pstmt.setString(6, admin.getA_birth());
-			pstmt.setString(7, admin.getA_phone());
-			pstmt.executeQuery();
+			int s = 0;
+			int x;
+				conn=getConnection();
+		        pstmt = conn.prepareStatement("select count(*) from Administrator");
+		        rs = pstmt.executeQuery();
+		        if(rs.next()){
+		        	x= rs.getInt(1);
+		        	if(x < 16){
+		        		NumberFormat numformat = NumberFormat.getIntegerInstance();
+		        		numformat.setMinimumIntegerDigits(2);
+			pstmt = conn.prepareStatement("insert into Administrator values(?,?,'FV215b_183',?,'master@HeadTong.co.kr', '2015-12-04', '02-111-1111')");		
+			pstmt.setString(1, (numformat.format(x)));
+			pstmt.setString(2, "Admin"+(numformat.format(x)));
+			pstmt.setString(3, "관리자"+(numformat.format(x)));
+		    pstmt.executeQuery();}
+		        
+			 }else{
+				 alert("생성량이 초과 되었습니다");
+			 }
+			
 		} catch (Exception e) { //예외처리
 			e.printStackTrace();
 
@@ -50,6 +62,11 @@ public class DAO {
 			try {if (conn != null) {conn.close();}} catch (SQLException e) {}
 		}
 	}
+	private void alert(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	public int userCheck(String id, String password) 
 			throws Exception {
 				Connection conn = null;
@@ -143,7 +160,7 @@ public class DAO {
 	}
 	
 	
-	public DTO getAdminlist(String a_id) throws Exception {
+	public DTO getAdminlist(String a_num) throws Exception {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -151,8 +168,8 @@ public class DAO {
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(
-			"select * from Administrator where a_id = ?"); 
-			pstmt.setString(1, a_id);
+			"select * from Administrator where a_num = ?"); 
+			pstmt.setString(1, a_num);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				adminlist = new DTO();
@@ -192,19 +209,18 @@ public class DAO {
 	 }
 	
 		    
-	public DTO updateGetAdmin(int a_num) throws Exception {
+	public DTO updateGetAdmin(String a_num) throws Exception {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		DTO admin =null;
+		DTO admin = new DTO();
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(
 			"select * from Administrator where a_num = ?"); 
-			pstmt.setInt(1, a_num);
+			pstmt.setString(1, a_num);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				admin = new DTO();
 				admin.setA_num(rs.getString("a_num"));
 				admin.setA_id(rs.getString("a_id"));
 				admin.setA_password(rs.getString("a_password"));
@@ -212,8 +228,6 @@ public class DAO {
 				admin.setA_email(rs.getString("a_email"));
 				admin.setA_birth(rs.getString("a_birth"));
 				admin.setA_phone(rs.getString("a_phone"));
-				
-		
 			}
 		} catch(Exception ex) {
 			ex.printStackTrace();
@@ -222,8 +236,39 @@ public class DAO {
 			if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
 			if (conn != null) try { conn.close(); } catch(SQLException ex) {}
 		}
-
 		return admin;
+	}
+	public void updateAdmin(DTO admin) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(
+			"update Administrator set a_password=?, a_email=?, a_birth=?, a_phone=?" + "where a_num = ?");
+			pstmt.setString(1, admin.getA_password());
+			pstmt.setString(2, admin.getA_email());
+			pstmt.setString(3, admin.getA_birth());
+			pstmt.setString(4, admin.getA_phone());
+			pstmt.setString(5, admin.getA_num());
+			System.out.println();
+			pstmt.executeUpdate();
+
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+				}
+		}
+        // 예외처리를 실시한다. 종료시에도 각각 예외처리 실시
 	}
 }
 
