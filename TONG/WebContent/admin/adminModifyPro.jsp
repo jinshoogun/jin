@@ -8,16 +8,27 @@
 <jsp:useBean id="admin" class="adminDATADB.bean.DTO">
 <jsp:setProperty name="admin" property="*" />
 </jsp:useBean>
- 
+
 <%
-String a_num = (String)session.getAttribute("a_num");
+/* admin.setA_password(request.getParameter("a_password"));
+admin.setA_birth(request.getParameter("a_birth"));
+admin.setA_email(request.getParameter("a_email"));
+admin.setA_phone(request.getParameter("a_phone")); */
+
+
+
+String a_num = request.getParameter("a_num");
 admin.setA_num(a_num);
+System.out.println(a_num);
 
 DAO manager = DAO.getInstance();
 manager.updateAdmin(admin);
- %>
- 
-<link href="style.css" rel="stylesheet" type="text/css">
+
+
+
+%>
+
+
 
 <table width="500" border="0" cellspacing="0" cellpadding="5" align="center">
   <tr> 

@@ -16,7 +16,7 @@
              <br/><input type="button" value="디자이너 삭제"  onclick="javascript:window.location='boardInfo.jsp'" ><br>
              <%if (((String)session.getAttribute("a_Id")).equals("SuperAdmin")){%>
               <br/><input type="button" value="관리자 추가, 삭제, 변경" onclick="javascript:window.location='adminModify.jsp'" ><br>
-              <br/><input type="button" value="회원 강제 탈퇴"  onclick="javascript:window.location='userKill.jsp'" ><br>
+              <br/><input type="button" value="회원정보 수정 및 탈퇴"  onclick="javascript:window.location='userKill.jsp'" ><br>
             	 
              <%} else { %>
 

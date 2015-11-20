@@ -48,7 +48,6 @@ public class DAO {
 			pstmt.setString(2, "Admin"+(numformat.format(x)));
 			pstmt.setString(3, "관리자"+(numformat.format(x)));
 		    pstmt.executeQuery();}
-		        
 			 }else{
 				 alert("생성량이 초과 되었습니다");
 			 }
@@ -216,6 +215,7 @@ public class DAO {
 		DTO admin = new DTO();
 		try {
 			conn = getConnection();
+
 			pstmt = conn.prepareStatement(
 			"select * from Administrator where a_num = ?"); 
 			pstmt.setString(1, a_num);
@@ -244,16 +244,14 @@ public class DAO {
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(
-			"update Administrator set a_password=?, a_email=?, a_birth=?, a_phone=?" + "where a_num = ?");
+			"update Administrator set a_password=?, a_email=?, a_birth=?, a_phone=? where a_num = ?");
 			pstmt.setString(1, admin.getA_password());
 			pstmt.setString(2, admin.getA_email());
-			pstmt.setString(3, admin.getA_birth());
-			pstmt.setString(4, admin.getA_phone());
+			pstmt.setString(3, admin.getA_phone());
+			pstmt.setString(4, admin.getA_birth());
 			pstmt.setString(5, admin.getA_num());
-			System.out.println();
 			pstmt.executeUpdate();
-
-
+			System.out.println("확인");
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -270,8 +268,65 @@ public class DAO {
 		}
         // 예외처리를 실시한다. 종료시에도 각각 예외처리 실시
 	}
+	
+	
+	public int getMembershipCount() throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int x=0;
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement("select count(*) from MEMBERSHIP");
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				x= rs.getInt(1); 
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+			if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+			if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+		}
+		return x; 
+	}
+	
+	public List getMembershiplists(int start, int end) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List adminList=null;
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(
+					"select * from Administrator where a_num >= ? and a_num <= ? order by a_num asc");
+					pstmt.setInt(1, start); 
+					pstmt.setInt(2, end); 
+   
+					rs = pstmt.executeQuery();
+					if (rs.next()) {
+						adminList = new ArrayList(end); 
+						do{ 
+							DTO adminlist= new DTO();
+							adminlist.setA_num(rs.getString("a_num"));
+							adminlist.setA_id(rs.getString("a_id"));
+							adminlist.setA_name(rs.getString("a_name"));
+							adminList.add(adminlist); 
+						}while(rs.next());
+					}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+			if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+			if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+		}
+
+		
+		return adminList;
 }
 
-
+}
 
 	 

@@ -7,19 +7,19 @@
 <head>
 <%
 	int numSize = 15;
-	String a_num = request.getParameter("a_num");
+	String m_id = request.getParameter("m_id");
 
-	if (a_num == null) {
-		a_num = "1";
+	if (m_id == null) {
+		m_id = "1";
 	}
-	int currentNum = Integer.parseInt(a_num);
+	int currentNum = Integer.parseInt(m_id);
 	int startNum = (currentNum - 1) * numSize + 1;
 	int endNum = currentNum * numSize;
 
 	int count = 0;
 	List adminList = null;
 	DAO dbPro = DAO.getInstance();
-	count = (dbPro.getAdminlistCount());
+	count = (dbPro.getAdminlistCount()) - 1;
 	if (count > 0) {
 		adminList = dbPro.getAdminlists(startNum, endNum);
 	}
