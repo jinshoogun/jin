@@ -15,15 +15,85 @@ public class DTO {
 	private String q_writer;
 	private String q_subject;
 	private String q_content;
-	private String q_password2; // 게시판 비번
+	private String q_password2;
 	private Timestamp q_reg_date;
 	private int q_readcount;
 	private int q_ref;
 	private int q_re_step;
 	private int q_re_level;
+	private int o_num;
+	private String o_writer;
+	private String o_subject;
+	private String o_content;
+	private String o_password2; // 게시판 비번
+	private Timestamp o_reg_date;
+	private int o_readcount;
+	private int o_ref;
+	private int o_re_step;
+	private int o_re_level;
 	
 	
 	
+	public int getO_num() {
+		return o_num;
+	}
+	public void setO_num(int o_num) {
+		this.o_num = o_num;
+	}
+	public String getO_writer() {
+		return o_writer;
+	}
+	public void setO_writer(String o_writer) {
+		this.o_writer = o_writer;
+	}
+	public String getO_subject() {
+		return o_subject;
+	}
+	public void setO_subject(String o_subject) {
+		this.o_subject = o_subject;
+	}
+	public String getO_content() {
+		return o_content;
+	}
+	public void setO_content(String o_content) {
+		this.o_content = o_content;
+	}
+	public String getO_password2() {
+		return o_password2;
+	}
+	public void setO_password2(String o_password2) {
+		this.o_password2 = o_password2;
+	}
+	public Timestamp getO_reg_date() {
+		return o_reg_date;
+	}
+	public void setO_reg_date(Timestamp o_reg_date) {
+		this.o_reg_date = o_reg_date;
+	}
+	public int getO_readcount() {
+		return o_readcount;
+	}
+	public void setO_readcount(int o_readcount) {
+		this.o_readcount = o_readcount;
+	}
+	public int getO_ref() {
+		return o_ref;
+	}
+	public void setO_ref(int o_ref) {
+		this.o_ref = o_ref;
+	}
+	public int getO_re_step() {
+		return o_re_step;
+	}
+	public void setO_re_step(int o_re_step) {
+		this.o_re_step = o_re_step;
+	}
+	public int getO_re_level() {
+		return o_re_level;
+	}
+	public void setO_re_level(int o_re_level) {
+		this.o_re_level = o_re_level;
+	}
 	public String getM_id() {
 		return m_id;
 	}

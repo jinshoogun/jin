@@ -506,7 +506,315 @@ public class DAO {
 				}
 				return x;
 			}
-			
+
+
+public List getOnebyOneMyArticles(int start, int end, String m_id) throws Exception {
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	List articleList=null;
+	try {
+		conn = getConnection();
+		pstmt = conn.prepareStatement(
+				"select O_num, O_writer, O_subject, O_password2, O_reg_date, O_ref, O_re_step, O_re_level, O_content, O_readcount, r "
+				+
+				"from (select O_num, O_writer, O_subject, O_password2, O_reg_date, O_ref, O_re_step, O_re_level, O_content, O_readcount, rownum r " +
+				"from (select O_num, O_writer, O_subject, O_password2, O_reg_date, O_ref, O_re_step, O_re_level, O_content, O_readcount " +
+				"from OnebyOne order by O_ref desc, O_re_step asc) order by O_ref desc, O_re_step asc ) where r >= ? and r <= ? and O_writer = ? ");
+				pstmt.setInt(1, start); 
+				pstmt.setInt(2, end); 
+				pstmt.setString(3, m_id); 
+
+				rs = pstmt.executeQuery();
+				if (rs.next()) {
+					articleList = new ArrayList(end); 
+					do{ 
+						DTO article= new DTO();
+						article.setO_num(rs.getInt("o_num"));
+						article.setO_writer(rs.getString("o_writer"));
+						article.setO_subject(rs.getString("o_subject"));
+						article.setO_password2(rs.getString("o_password2"));
+						article.setO_reg_date(rs.getTimestamp("o_reg_date"));
+						article.setO_readcount(rs.getInt("o_readcount"));
+						article.setO_ref(rs.getInt("o_ref"));
+						article.setO_re_step(rs.getInt("o_re_step"));
+						article.setO_re_level(rs.getInt("o_re_level"));
+						article.setO_content(rs.getString("o_content"));
+						articleList.add(article); 
+					}while(rs.next());
+				}
+	} catch(Exception ex) {
+		ex.printStackTrace();
+	} finally {
+		if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+		if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+		if (conn != null) try { conn.close(); } catch(SQLException ex) {}
 	}
+	
+	return articleList;
+	
+}
+public int getOneByOneMyArticleCount(String m_id) throws Exception {
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	int x=0;
+	try {
+		conn = getConnection();
+		pstmt = conn.prepareStatement("select count(*) from OnebyOne where o_writer = ? ");
+		pstmt.setString(1, m_id);
+		rs = pstmt.executeQuery();
+		if (rs.next()) {
+			x= rs.getInt(1); 
+		}
+	} catch(Exception ex) {
+		ex.printStackTrace();
+	} finally {
+		if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+		if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+		if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+	}
+	return x; 
+}
+
+public int getOneByOneAdminArticleCount() throws Exception {
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	int x=0;
+	try {
+		conn = getConnection();
+		pstmt = conn.prepareStatement("select count(*) from OnebyOne");
+		rs = pstmt.executeQuery();
+		if (rs.next()) {
+			x= rs.getInt(1); 
+		}
+	} catch(Exception ex) {
+		ex.printStackTrace();
+	} finally {
+		if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+		if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+		if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+	}
+	return x; 
+}
+
+public List getOnebyOneAdminArticles(int start, int end) throws Exception {
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	List adminArticleList=null;
+	try {
+		conn = getConnection();
+		pstmt = conn.prepareStatement(
+				"select O_num, O_writer, O_subject, O_password2, O_reg_date, O_ref, O_re_step, O_re_level, O_content, O_readcount, r "
+				+
+				"from (select O_num, O_writer, O_subject, O_password2, O_reg_date, O_ref, O_re_step, O_re_level, O_content, O_readcount, rownum r " +
+				"from (select O_num, O_writer, O_subject, O_password2, O_reg_date, O_ref, O_re_step, O_re_level, O_content, O_readcount " +
+				"from OnebyOne order by O_ref desc, O_re_step asc) order by O_ref desc, O_re_step asc ) where r >= ? and r <= ?");
+				pstmt.setInt(1, start); 
+				pstmt.setInt(2, end); 
+
+				rs = pstmt.executeQuery();
+				if (rs.next()) {
+					adminArticleList = new ArrayList(end); 
+					do{DTO article= new DTO();
+					article.setO_num(rs.getInt("o_num"));
+					article.setO_writer(rs.getString("o_writer"));
+					article.setO_subject(rs.getString("o_subject"));
+					article.setO_password2(rs.getString("o_password2"));
+					article.setO_reg_date(rs.getTimestamp("o_reg_date"));
+					article.setO_readcount(rs.getInt("o_readcount"));
+					article.setO_ref(rs.getInt("o_ref"));
+					article.setO_re_step(rs.getInt("o_re_step"));
+					article.setO_re_level(rs.getInt("o_re_level"));
+					article.setO_content(rs.getString("o_content"));
+						adminArticleList.add(article); 
+					}while(rs.next());
+				}
+	} catch(Exception ex) {
+		ex.printStackTrace();
+	} finally {
+		if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+		if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+		if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+	}
+	
+	return adminArticleList;
+	
+}
+
+public void insertOneByOneArticle(DTO article) throws Exception {
+	
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	int o_num=article.getO_num();
+	int o_ref=article.getO_ref();
+	int o_re_step=article.getO_re_step();
+	int o_re_level=article.getO_re_level();
+	int number=0;
+	
+	String sql="";
+	try {
+		conn = getConnection(); 
+		pstmt = conn.prepareStatement("select max(O_num) from OnebyOne");
+		//글의 그룹번호를 지정하기 위해 사용?
+		rs = pstmt.executeQuery();
+		if (rs.next()) 
+			number=rs.getInt(1)+1;	
+		else
+			number=1; 
+		// writeForm에 int num=0,ref=1,re_step=0,re_level=0;로 시작하기 때문에 참조해서 이해보세욧
+		if (o_num!=0) 
+		{ 
+			sql="update OnebyOne set o_re_step=o_re_step+1 where o_ref= ? and o_re_step> ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, o_ref);
+			pstmt.setInt(2, o_re_step);
+			pstmt.executeUpdate();
+			o_re_step=o_re_step+1;
+			o_re_level=o_re_level+1;
+
+		}else{ 
+			o_ref=number;				// 0   16y 
+			o_re_step=0;
+			o_re_level=0;
+		}
+		
+		sql = "insert into OnebyOne (o_num, o_writer, o_subject, o_content, o_password2, ";
+		sql+="o_readcount, o_ref, o_re_step, o_re_level, o_reg_date) values (OnebyOne_seq.NEXTVAL,?,?,?,?,?,?,?,?,sysdate)";
+			pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, article.getO_writer());
+		pstmt.setString(2, article.getO_subject());
+		pstmt.setString(3, article.getO_content());
+		pstmt.setString(4, article.getO_password2());
+		pstmt.setInt(5, article.getO_readcount());
+		pstmt.setInt(6, o_ref);
+		pstmt.setInt(7, o_re_step);
+		pstmt.setInt(8, o_re_level);
+		pstmt.executeUpdate();
+
+	} catch(Exception ex) {
+		ex.printStackTrace();
+	} finally {
+		if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+		if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+		if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+	}
+}
+
+
+public DTO getOnebyOneArticle(int o_num) throws Exception {
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	DTO article=null;
+	try {
+		conn = getConnection();
+		pstmt = conn.prepareStatement(
+		"select * from OnebyOne where o_num = ?"); 
+		pstmt.setInt(1, o_num);
+		rs = pstmt.executeQuery();
+		if (rs.next()) {
+			article = new DTO();
+			article.setO_num(rs.getInt("o_num"));
+			article.setO_writer(rs.getString("o_writer"));
+			article.setO_subject(rs.getString("o_subject"));
+			article.setO_password2(rs.getString("o_password2"));
+			article.setO_readcount(rs.getInt("o_readcount"));
+			article.setO_reg_date(rs.getTimestamp("o_reg_date"));
+			article.setO_ref(rs.getInt("o_ref"));
+			article.setO_re_step(rs.getInt("o_re_step"));
+			article.setO_re_level(rs.getInt("o_re_level"));
+			article.setO_content(rs.getString("o_content"));
+		}
+	} catch(Exception ex) {
+		ex.printStackTrace();
+	} finally {
+		if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+		if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+		if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+	}
+	
+	return article;
+}
+
+public DTO updateOnebyOneGetArticle(int o_num) throws Exception {
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	DTO article=null;
+	try {
+		conn = getConnection();
+		pstmt = conn.prepareStatement(
+		"select * from OnebyOne where o_num = ?"); 
+		pstmt.setInt(1, o_num);
+		rs = pstmt.executeQuery();
+		if (rs.next()) {
+			article = new DTO();
+			article.setO_num(rs.getInt("o_num"));
+			article.setO_writer(rs.getString("o_writer"));
+			article.setO_subject(rs.getString("o_subject"));
+			article.setO_password2(rs.getString("o_password2"));
+			article.setO_reg_date(rs.getTimestamp("o_reg_date"));
+			article.setO_readcount(rs.getInt("o_readcount"));
+			article.setO_ref(rs.getInt("o_ref"));
+			article.setO_re_step(rs.getInt("o_re_step"));
+			article.setO_re_level(rs.getInt("o_re_level"));
+			article.setO_content(rs.getString("o_content"));
+		}
+	} catch(Exception ex) {
+		ex.printStackTrace();
+	} finally {
+		if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+		if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+		if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+	}
+
+	return article;
+}
+public int updateOnebyOneArticle(DTO article) throws Exception {
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs= null;
+	String dbpasswd="";
+	String sql="";
+	int x=-1;
+	try {
+		conn = getConnection();
+		pstmt = conn.prepareStatement(
+		"select q_password2 from OnebyOne where o_num = ?");
+		pstmt.setInt(1, article.getO_num());
+		rs = pstmt.executeQuery();
+		if(rs.next()){
+			dbpasswd= rs.getString("o_password2"); 
+			if(dbpasswd.equals(article.getO_password2())){
+				sql="update OnebyOne set o_writer=?,o_subject=?, o_password2=?";
+				sql+=",o_content=? where o_num=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, article.getO_writer());
+				pstmt.setString(2, article.getO_subject());
+				pstmt.setString(3, article.getO_password2());
+				pstmt.setString(4, article.getO_content());
+				pstmt.setInt(5, article.getO_num());
+				pstmt.executeUpdate();
+				x= 1;
+			}else{
+				x= 0;
+			}
+		}
+	} catch(Exception ex) {
+		ex.printStackTrace();
+	} finally {
+		if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+		if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+		if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+	}
+	return x;
+	
+}
+	}
+
 
 	 
