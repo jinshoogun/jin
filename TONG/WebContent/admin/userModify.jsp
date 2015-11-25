@@ -7,25 +7,36 @@
 <head>
 <%
 	int numSize = 15;
-	String m_id = request.getParameter("m_id");
+	String num = request.getParameter("m_num");
+	String pageReturn = "";
 
-	if (m_id == null) {
-		m_id = "1";
+	if (num == null) {
+		num = "1";
 	}
-	int currentNum = Integer.parseInt(m_id);
-	int startNum = (currentNum - 1) * numSize + 1;
-	int endNum = currentNum * numSize;
+	String skey = request.getParameter("skey");
+	String sval = request.getParameter("sval");
+	String sqry = "";
+	if (skey != null && sval != null){
+		pageReturn = "&skey="+skey+"&sval="+sval;
+		sqry = " where "+skey+" like '%"+sval+"%' ";
+	}else{
+		skey = "writer";
+		sval = "";
+	}
+	int currentpage = Integer.parseInt(num);
+	int startNum = (currentpage - 1) * numSize + 1;
+	int endNum = currentpage * numSize;
 
 	int count = 0;
-	List adminList = null;
+	List userList = null;
 	DAO dbPro = DAO.getInstance();
-	count = (dbPro.getAdminlistCount()) - 1;
+	count = (dbPro.getUserlistCount(sqry));
 	if (count > 0) {
-		adminList = dbPro.getAdminlists(startNum, endNum);
+		userList = dbPro.getUserlists(startNum, endNum, sqry);
 	}
 %>
 <center>
-	<b>관리자 정보입니다. (전체 관리자 계정:<%=count%>)
+	<b>일반회원 정보입니다. (일반회원 계정:<%=count%>)
 	</b>
 
 	<%
@@ -33,7 +44,7 @@
 	%>
 	<table width="600" border="1" cellpadding="0" cellspacing="0">
 		<tr>
-			<td align="center">관리자 계정이 없습니다.</td>
+			<td align="center">회원이 없습니다.</td>
 	</table>
 
 	<%
@@ -48,17 +59,17 @@
 			<td align="center" width="150">삭 제</td>
 		</tr>
 		<%
-			for (int i = 0; i < adminList.size(); i++) {
-					DTO admin = (DTO) adminList.get(i);
+			for (int i = 0; i < userList.size(); i++) {
+					DTO user = (DTO) userList.get(i);
 		%>
 		<tr height="30">
-			<td align="center" width="100"><%=admin.getA_num()%></td>
-			<td align="center" width="100"><%=admin.getA_id()%></td>
-			<td align="center" width="150"><%=admin.getA_name()%></td>
+			<td align="center" width="100"><%=user.getM_num()%></td>
+			<td align="center" width="100"><%=user.getM_id()%></td>
+			<td align="center" width="150"><%=user.getM_name()%></td>
 			<td align="center"><input type="button" value="정보 수정"
-				onclick="document.location.href='adminModifyFrom.jsp?a_num=<%=admin.getA_num()%>'"></td>
+				onclick="document.location.href='adminModifyFrom.jsp?m_num=<%=user.getM_num()%>'"></td>
 			<td align="center"><input type="button" value="계정 삭제"
-				onclick="window.location='adminDelete.jsp?a_num=<%=admin.getA_num()%>'" /></td>
+				onclick="window.location='adminDelete.jsp?m_num=<%=user.getM_num()%>'" /></td>
 		</tr>
 
 		<%
@@ -66,10 +77,27 @@
 			}
 		%>
 	</table>
+	<script language="JavaScript">
+function chkSch(form){
+	if(form.sval.value){
+		return true;
+	}
+	alert("검색하라며?");
+	form.sval.focus();
+	return false;
+}
+</script>
+	<form method="get" action="list.jsp" name="searchForm" onSubmit="return chkSch(this);">
 	<table>
 		<tr>
-			<td align="right"><input type="button" value="추가"
-				onclick="window.location='adminAdd.jsp'"></td>
+		<td align="right">
+		<select name="skey">
+			<OPTION value="m_id" <%=(skey.equals("m_id"))?"selected":""%>>아이디</OPTION>
+			<OPTION value="m_name" <%=(skey.equals("m_name"))?"selected":""%>>이름</OPTION>
+		</select>
+		<input type=text name="sval" value="<%=sval%>">
+		<input type=submit value="검색">
+		<%=(!sval.equals(""))?"<a href=\"list.jsp\">원래대로</a>":""%>
 		    <td align="right"><input type="button" value="이전"
 				onclick="window.location='main.jsp'"></td>
 		</tr>

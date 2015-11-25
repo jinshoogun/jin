@@ -6,16 +6,16 @@
 <% request.setCharacterEncoding("euc-kr");%>
 
 <%
-  int q_num = Integer.parseInt(request.getParameter("q_num"));
-  String q_pageNum = request.getParameter("q_pageNum");
-  String q_password2 = request.getParameter("q_password2");
+  int o_num = Integer.parseInt(request.getParameter("o_num"));
+  String o_pageNum = request.getParameter("o_pageNum");
+  String o_password2 = request.getParameter("o_password2");
 
   DAO dbPro = DAO.getInstance();
-  int check = dbPro.deleteArticle(q_num, q_password2);
+  int check = dbPro.OnebyOnedeleteArticle(o_num, o_password2);
 
   if(check==1){
 %>
-	  <meta http-equiv="Refresh" content="0;url=list.jsp?q_pageNum=<%=q_pageNum%>" >
+	  <meta http-equiv="Refresh" content="0;url=list.jsp?o_pageNum=<%=o_pageNum%>" >
 <% }else{%>
        <script language="JavaScript">      
        <!--      

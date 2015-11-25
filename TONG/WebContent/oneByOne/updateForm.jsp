@@ -39,7 +39,7 @@
   <tr>
     <td  width="70" align="center" >비밀번호</td>
     <td align="left" width="330" >
-     <input type="password" size="8" maxlength="12" name="O_password2">
+     <input type="password" size="8" maxlength="12" name="o_password2">
      
 	 </td>
   </tr>

@@ -14,6 +14,7 @@
 
 	DAO dbPro = DAO.getInstance();
     int check = dbPro.updateOnebyOneArticle(article);
+    System.out.println(check);
     if(check==1){
 %>
 	  <meta http-equiv="Refresh" content="0;url=list.jsp?o_pageNum=<%=o_pageNum%>">

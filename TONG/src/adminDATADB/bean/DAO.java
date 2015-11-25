@@ -6,6 +6,7 @@ import java.util.List;
 import javax.sql.*;
 import javax.naming.*;
 import java.text.NumberFormat;
+import adminDATADB.bean.DTO;
 
 
 public class DAO {
@@ -250,8 +251,7 @@ public class DAO {
 			pstmt.setString(3, admin.getA_phone());
 			pstmt.setString(4, admin.getA_birth());
 			pstmt.setString(5, admin.getA_num());
-			pstmt.executeUpdate();
-			System.out.println("»Æ¿Œ");
+			pstmt.executeUpdate();;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -322,11 +322,73 @@ public class DAO {
 			if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
 			if (conn != null) try { conn.close(); } catch(SQLException ex) {}
 		}
-
-		
 		return adminList;
-}
+	}
 
+	public List getUserlists(int start, int end, String sqry) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List articleList=null;
+		String sql="";
+		String col="";
+
+		try {
+			conn = getConnection();
+			col = "m_num, m_id, m_password, m_name, m_email, m_sex, m_birth, m_phone, m_reg";
+			pstmt = conn.prepareStatement("select "+col+" from ( select "+col+", rownum r"+" from ( select "+col+" from membership "+sqry+" order by m_reg desc) ) where r between ? and ?");	//	public List getArticles(int start, int end, String sqry) throws Exception {
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				articleList = new ArrayList(end);
+				do{
+					DTO article= new DTO();
+			      	article.setM_num(rs.getString("m_num"));
+			      	article.setM_id(rs.getString("m_id"));
+					article.setM_password(rs.getString("m_password"));
+					article.setM_name(rs.getString("m_name"));
+					article.setM_email(rs.getString("m_email"));
+					article.setM_sex(rs.getString("m_sex"));
+					article.setM_birth(rs.getString("m_birth"));
+					article.setM_phone(rs.getString("m_phone"));
+					article.setM_reg(rs.getTimestamp("m_reg"));
+					articleList.add(article);
+				}while(rs.next());
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+			if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+			if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+		}
+		return articleList;
+	}
+	public int getUserlistCount(String sqry) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		int x=0;
+
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement("select count(*) from membership "+sqry);	//	public int getArticleCount(String sqry) throws Exception {
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				x= rs.getInt(1);
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+			if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+			if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+		}
+		return x;
+	}	//	int getArticleCount(String sqry)
 }
 
 	 

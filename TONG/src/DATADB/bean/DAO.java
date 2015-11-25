@@ -784,11 +784,11 @@ public int updateOnebyOneArticle(DTO article) throws Exception {
 	try {
 		conn = getConnection();
 		pstmt = conn.prepareStatement(
-		"select q_password2 from OnebyOne where o_num = ?");
+		"select o_password2 from OnebyOne where o_num = ?");
 		pstmt.setInt(1, article.getO_num());
 		rs = pstmt.executeQuery();
 		if(rs.next()){
-			dbpasswd= rs.getString("o_password2"); 
+			dbpasswd = rs.getString("o_password2"); 
 			if(dbpasswd.equals(article.getO_password2())){
 				sql="update OnebyOne set o_writer=?,o_subject=?, o_password2=?";
 				sql+=",o_content=? where o_num=?";
@@ -813,6 +813,38 @@ public int updateOnebyOneArticle(DTO article) throws Exception {
 	}
 	return x;
 	
+}
+public int OnebyOnedeleteArticle(int o_num, String o_password2) throws Exception {
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs= null;
+	String dbpasswd="";
+	int x=-1;
+	try {
+		conn = getConnection();
+		pstmt = conn.prepareStatement(
+		"select o_password2 from OnebyOne where o_num = ?");
+		pstmt.setInt(1, o_num);
+		rs = pstmt.executeQuery();
+		if(rs.next()){
+			dbpasswd= rs.getString("o_password2");
+			if(dbpasswd.equals(o_password2)){
+				pstmt = conn.prepareStatement(
+				"delete from OnebyOne where o_num=?");
+				pstmt.setInt(1, o_num);
+				pstmt.executeUpdate();
+				x= 1; 
+			}else
+				x= 0; 
+		}
+	} catch(Exception ex) {
+		ex.printStackTrace();
+	} finally {
+		if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+		if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+		if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+	}
+	return x;
 }
 	}
 

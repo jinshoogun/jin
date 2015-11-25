@@ -3,8 +3,8 @@
 <%@ page import = "DATADB.bean.DTO" %>
 
 <%
-  int q_num = Integer.parseInt(request.getParameter("q_num"));
-  String q_pageNum = request.getParameter("q_pageNum");
+  int o_num = Integer.parseInt(request.getParameter("o_num"));
+  String o_pageNum = request.getParameter("o_pageNum");
 
 %>
 <html>
@@ -28,7 +28,7 @@
 <body>
 <center><b>글삭제</b>
 <br>
-<form method="POST" name="delForm"  action="deletePro.jsp?q_pageNum=<%=q_pageNum%>" 
+<form method="POST" name="delForm"  action="deletePro.jsp?o_pageNum=<%=o_pageNum%>" 
    onsubmit="return deleteSave()"> 
  <table border="1" align="center" cellspacing="0" cellpadding="0" width="360">
   <tr height="30">
@@ -37,14 +37,14 @@
   </tr>
   <tr height="30">
      <td align=center >비밀번호 :   
-       <input type="password" name="q_password2" size="8" maxlength="12">
-	   <input type="hidden" name="q_num" value="<%=q_num%>"></td>
+       <input type="password" name="o_password2" size="8" maxlength="12">
+	   <input type="hidden" name="o_num" value="<%=o_num%>"></td>
  </tr>
  <tr height="30">
     <td align=center >
       <input type="submit" value="글삭제" >
       <input type="button" value="글목록" 
-       onclick="document.location.href='list.jsp?q_pageNum=<%=q_pageNum%>'">     
+       onclick="document.location.href='list.jsp?o_pageNum=<%=o_pageNum%>'">     
    </td>
  </tr>  
 </table> 

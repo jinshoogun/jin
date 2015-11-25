@@ -53,10 +53,7 @@
   </tr>
   <tr height="30">      
     <td colspan="4" align="right" > 
-        <%if (session.getAttribute("m_id") !=null){
-        	String id = (String)session.getAttribute("m_id");
-        	if(id.equals(article.getO_writer()))
-        	{
+     <% String id = (String)session.getAttribute("m_id");
         	%>
 	 
 	  <input type="button" value="글수정" 
@@ -67,40 +64,14 @@
        onclick="document.location.href='deleteForm.jsp?o_num=<%=article.getO_num()%>&o_pageNum=<%=o_pageNum%>'">
 	   &nbsp;&nbsp;&nbsp;&nbsp;
       
-      <input type="button" value="답글쓰기" 
-       onclick="document.location.href='writeForm.jsp?o_num=<%=o_num%>&o_ref=<%=o_ref%>&o_re_step=<%=o_re_step%>o_re_level=<%=o_re_level%>'">
-	   &nbsp;&nbsp;&nbsp;&nbsp;
-       
-   
-      
-       <%} if(!id.equals(article.getO_writer()))
-        	{
-        	%> 
-      
-       <input type="button" value="답글쓰기" 
-       onclick="document.location.href='writeForm.jsp?o_num=<%=o_num%>&o_ref=<%=o_ref%>&o_re_step=<%=o_re_step%>&o_re_level=<%=o_re_level%>'">
-	   &nbsp;&nbsp;&nbsp;&nbsp;
-	   
-	   <input type="button" value="글목록" 
-       onclick="document.location.href='list.jsp?o_pageNum=<%=o_pageNum%>'">
-       
        <input type="button" value="이전글" onclick="document.location.href='content.jsp?o_num=<%=back%>&o_pageNum=<%=o_pageNum%>'">
        <input type="button" value="다음글" onclick="document.location.href='content.jsp?o_num=<%=forward%>&o_pageNum=<%=o_pageNum%>'">
+       <input type="button" value="목록" onclick="document.location.href='list.jsp?o_pageNum=<%=o_pageNum%>'">
        
-       <%} }else if(session.getAttribute("m_id") ==null){ %>
-       <input type="button" value="글목록" 
-       onclick="document.location.href='list.jsp?o_pageNum=<%=o_pageNum%>'">
-       
-       <input type="button" value="이전글" onclick="document.location.href='content.jsp?o_num=<%=back%>&o_pageNum=<%=o_pageNum%>'">
-       <input type="button" value="다음글" onclick="document.location.href='content.jsp?o_num=<%=forward%>&o_pageNum=<%=o_pageNum%>'">
     </td>
   </tr>
 </table>    
-<%} else {
-	   
-	   }
- }catch(Exception e){} 
- %>
+<%}catch(Exception e){}%>
 </form>      
 </body>
 </html>      

@@ -13,7 +13,7 @@
 // DAO에 있는 userCheck 메소드를 통해 아이디와 비밀번호가 있는지 체크합니다.
 // check값은 userCheck 메소드에 x값을 집어넣습니다.
 	if(check==1){
-		session.setAttribute("a_Id",id);
+		session.setAttribute("a_id",id);
 		response.sendRedirect("main.jsp");
 		// x=1일 경우 세션이 연결되어서 로그인으로 하게 되고 main if문에 else문을 실행하게 됩니다.
 	}else{%>
