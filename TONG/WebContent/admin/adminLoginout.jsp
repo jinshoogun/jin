@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%
-// adminLogout.jsp
-session.removeAttribute("s_admin_id");
-session.removeAttribute("s_admin_mlevel");
+session.removeAttribute("a_id");
 %>
 <script type="text/javascript">
-  alert("관리자페이지 로그아웃!!");
+  alert("로그아웃 되었습니다.");
   location.href="adminLogin.jsp";
 </script>

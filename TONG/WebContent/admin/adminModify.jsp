@@ -23,6 +23,7 @@
 	if (count > 0) {
 		adminList = dbPro.getAdminlists(startNum, endNum);
 	}
+	
 %>
 <center>
 	<b>관리자 정보입니다. (전체 관리자 계정:<%=count%>)

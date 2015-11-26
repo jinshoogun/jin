@@ -30,6 +30,7 @@
     }
 
 	number=count-(currentPage-1)*pageSize;
+	int pageSave = number;
 %>
 <html>
 <head>
@@ -38,6 +39,7 @@
 </head>
 
 <body>
+<input name ="pageSave" type="hidden" value="<%=pageSave%>">
 <center><b>QnA 게시판입니다. (전체 글:<%=count%>)</b>
 
 <table width="700">
@@ -77,6 +79,7 @@
 %>
    <tr height="30">
     <td align="center"  width="50" > <%=number--%></td>
+    								<!--    -->
     <td  width="250" >
 	<%
 	      int wid=0; 
@@ -88,7 +91,7 @@
 	<%}else{%>
 	  <img src="images/level.gif" width="<%=wid%>" height="16">
 	<%}%>
-      <a href="content.jsp?q_num=<%=article.getQ_num()%>&q_pageNum=<%=currentPage%>">
+      <a href="content.jsp?q_num=<%=article.getQ_num()%>&q_pageNum=<%=currentPage%>&pageSave=<%=pageSave%>">
 
            <%=article.getQ_subject()%></a> 
           <% if(article.getQ_readcount()>=20){%>

@@ -6,7 +6,7 @@ import java.util.List;
 import javax.sql.*;
 import javax.naming.*;
 import java.text.NumberFormat;
-import adminDATADB.bean.DTO;
+
 
 
 public class DAO {
@@ -50,7 +50,7 @@ public class DAO {
 			pstmt.setString(3, "관리자"+(numformat.format(x)));
 		    pstmt.executeQuery();}
 			 }else{
-				 alert("생성량이 초과 되었습니다");
+
 			 }
 			
 		} catch (Exception e) { //예외처리
@@ -62,10 +62,7 @@ public class DAO {
 			try {if (conn != null) {conn.close();}} catch (SQLException e) {}
 		}
 	}
-	private void alert(String string) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 	public int userCheck(String id, String password) 
 			throws Exception {
@@ -291,45 +288,12 @@ public class DAO {
 		}
 		return x; 
 	}
-	
-	public List getMembershiplists(int start, int end) throws Exception {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		List adminList=null;
-		try {
-			conn = getConnection();
-			pstmt = conn.prepareStatement(
-					"select * from Administrator where a_num >= ? and a_num <= ? order by a_num asc");
-					pstmt.setInt(1, start); 
-					pstmt.setInt(2, end); 
-   
-					rs = pstmt.executeQuery();
-					if (rs.next()) {
-						adminList = new ArrayList(end); 
-						do{ 
-							DTO adminlist= new DTO();
-							adminlist.setA_num(rs.getString("a_num"));
-							adminlist.setA_id(rs.getString("a_id"));
-							adminlist.setA_name(rs.getString("a_name"));
-							adminList.add(adminlist); 
-						}while(rs.next());
-					}
-		} catch(Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			if (rs != null) try { rs.close(); } catch(SQLException ex) {}
-			if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
-			if (conn != null) try { conn.close(); } catch(SQLException ex) {}
-		}
-		return adminList;
-	}
 
 	public List getUserlists(int start, int end, String sqry) throws Exception {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		List articleList=null;
+		List UserList=null;
 		String sql="";
 		String col="";
 
@@ -342,19 +306,19 @@ public class DAO {
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				articleList = new ArrayList(end);
+				UserList = new ArrayList(end);
 				do{
-					DTO article= new DTO();
-			      	article.setM_num(rs.getString("m_num"));
-			      	article.setM_id(rs.getString("m_id"));
-					article.setM_password(rs.getString("m_password"));
-					article.setM_name(rs.getString("m_name"));
-					article.setM_email(rs.getString("m_email"));
-					article.setM_sex(rs.getString("m_sex"));
-					article.setM_birth(rs.getString("m_birth"));
-					article.setM_phone(rs.getString("m_phone"));
-					article.setM_reg(rs.getTimestamp("m_reg"));
-					articleList.add(article);
+					DTO userInfo= new DTO();
+					userInfo.setM_num(rs.getString("m_num"));
+					userInfo.setM_id(rs.getString("m_id"));
+					userInfo.setM_password(rs.getString("m_password"));
+					userInfo.setM_name(rs.getString("m_name"));
+					userInfo.setM_email(rs.getString("m_email"));
+					userInfo.setM_sex(rs.getString("m_sex"));
+					userInfo.setM_birth(rs.getString("m_birth"));
+					userInfo.setM_phone(rs.getString("m_phone"));
+					userInfo.setM_reg(rs.getTimestamp("m_reg"));
+					UserList.add(userInfo);
 				}while(rs.next());
 			}
 		} catch(Exception ex) {
@@ -364,7 +328,7 @@ public class DAO {
 			if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
 			if (conn != null) try { conn.close(); } catch(SQLException ex) {}
 		}
-		return articleList;
+		return UserList;
 	}
 	public int getUserlistCount(String sqry) throws Exception {
 		Connection conn = null;
@@ -375,7 +339,7 @@ public class DAO {
 
 		try {
 			conn = getConnection();
-			pstmt = conn.prepareStatement("select count(*) from membership "+sqry);	//	public int getArticleCount(String sqry) throws Exception {
+			pstmt = conn.prepareStatement("select count(*) from membership " + sqry);	//	public int getArticleCount(String sqry) throws Exception {
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				x= rs.getInt(1);
@@ -388,7 +352,241 @@ public class DAO {
 			if (conn != null) try { conn.close(); } catch(SQLException ex) {}
 		}
 		return x;
-	}	//	int getArticleCount(String sqry)
+	}
+	
+	public DTO updateGetUser(String m_num) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		DTO user = new DTO();
+		try {
+			conn = getConnection();
+
+			pstmt = conn.prepareStatement(
+			"select * from membership where m_num = ?"); 
+			pstmt.setString(1, m_num);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				user.setM_num(rs.getString("m_num"));
+				user.setM_id(rs.getString("m_id"));
+				user.setM_password(rs.getString("m_password"));
+				user.setM_name(rs.getString("m_name"));
+				user.setM_email(rs.getString("m_email"));
+				user.setM_sex(rs.getString("m_sex"));
+				user.setM_birth(rs.getString("m_birth"));
+				user.setM_phone(rs.getString("m_phone"));
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+			if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+			if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+		}
+		return user;
+	}
+	public void updateUser(DTO user) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(
+			"update membership set m_password=?, m_email=?, m_birth=?, m_phone=? where m_num = ?");
+			pstmt.setString(1, user.getM_password());
+			pstmt.setString(2, user.getM_email());;
+			pstmt.setString(3, user.getM_birth());
+			pstmt.setString(4, user.getM_phone());
+			pstmt.setString(5, user.getM_num());
+			
+			pstmt.executeUpdate();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+				}
+		}
+	}
+	
+	public void DeleteUser(int m_num) throws Exception {
+		 Connection conn = null;
+		 PreparedStatement pstmt= null;
+		 ResultSet rs = null;
+		 try {
+			 conn = getConnection();  //커넥션 연결
+			 pstmt = conn.prepareStatement("delete from membership where m_num=?");
+			 pstmt.setInt(1, m_num);
+			 rs=pstmt.executeQuery();
+			 
+		 }catch(Exception ex) {
+			 ex.printStackTrace();
+		 }finally {
+			 if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+	            if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+	            if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+		 }
+	 }
+	
+	
+	public List getDesignerlists(int start, int end, String sqry) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List DesignerList=null;
+		String sql="";
+		String col="";
+
+		try {
+			conn = getConnection();
+			col = "d_num, d_id, d_password, d_name, d_nickname, d_email, d_sex, d_birth, d_phone, d_store, d_date ";
+			pstmt = conn.prepareStatement("select "+col+" from ( select "+col+", rownum r"+" from ( select "+col+" from designer "+sqry+" order by d_date desc) ) where r between ? and ?");
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				DesignerList = new ArrayList(end);
+				do{
+					DTO designerInfo= new DTO();
+					designerInfo.setD_num(rs.getString("d_num"));
+					designerInfo.setD_id(rs.getString("d_id"));
+					designerInfo.setD_password(rs.getString("d_password"));
+					designerInfo.setD_nickname(rs.getString("d_nickname"));
+					designerInfo.setD_name(rs.getString("d_name"));
+					designerInfo.setD_email(rs.getString("d_email"));
+					designerInfo.setD_sex(rs.getString("d_sex"));
+					designerInfo.setD_birth(rs.getString("d_birth"));
+					designerInfo.setD_phone(rs.getString("d_phone"));
+					designerInfo.setD_store(rs.getString("d_store"));
+					designerInfo.setD_date(rs.getTimestamp("d_date"));
+					DesignerList.add(designerInfo);
+				}while(rs.next());
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+			if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+			if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+		}
+		return DesignerList;
+	}
+	
+	public int getDesignerlistCount(String sqry) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		int x=0;
+
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement("select count(*) from designer " + sqry);	//	public int getArticleCount(String sqry) throws Exception {
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				x= rs.getInt(1);
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+			if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+			if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+		}
+		return x;
+	}
+	
+	public DTO updateGetDesigner(String d_num) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		DTO designer = new DTO();
+		try {
+			conn = getConnection();
+
+			pstmt = conn.prepareStatement(
+			"select * from designer where d_num = ?"); 
+			pstmt.setString(1, d_num);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				designer.setD_num(rs.getString("d_num"));
+				designer.setD_id(rs.getString("d_id"));
+				designer.setD_password(rs.getString("d_password"));
+				designer.setD_name(rs.getString("d_name"));
+				designer.setD_email(rs.getString("d_email"));
+				designer.setD_sex(rs.getString("d_sex"));
+				designer.setD_birth(rs.getString("d_birth"));
+				designer.setD_phone(rs.getString("d_phone"));
+				designer.setD_nickname(rs.getString("d_nickname"));
+				designer.setD_store(rs.getString("d_store"));
+				designer.setD_date(rs.getTimestamp("d_date"));
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+			if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+			if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+		}
+		return designer;
+	}
+	public void updateDesigner(DTO designer) throws Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(
+			"update Designer set d_password=?, d_email=?, d_birth=?, d_phone=?, d_store=?, d_nickname=? where d_num = ?");
+			pstmt.setString(1, designer.getD_password());
+			pstmt.setString(2, designer.getD_email());;
+			pstmt.setString(3, designer.getD_birth());
+			pstmt.setString(4, designer.getD_phone());
+			pstmt.setString(5, designer.getD_store());
+			pstmt.setString(6, designer.getD_nickname());
+			pstmt.setString(7, designer.getD_num());
+			
+			pstmt.executeUpdate();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+				}
+		}
+	}
+	
+	public void DeleteDesigner(int d_num) throws Exception {
+		 Connection conn = null;
+		 PreparedStatement pstmt= null;
+		 ResultSet rs = null;
+		 try {
+			 conn = getConnection();  //커넥션 연결
+			 pstmt = conn.prepareStatement("delete from designer where d_num=?");
+			 pstmt.setInt(1, d_num);
+			 rs=pstmt.executeQuery();
+			 
+		 }catch(Exception ex) {
+			 ex.printStackTrace();
+		 }finally {
+			 if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+	            if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+	            if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+		 }
+	 }
 }
 
 	 

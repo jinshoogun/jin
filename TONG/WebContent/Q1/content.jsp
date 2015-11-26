@@ -1,16 +1,36 @@
+<%@page import="javafx.scene.control.Alert"%>
 <%@ page contentType = "text/html; charset=euc-kr" %>
 <%@ page import = "DATADB.bean.DAO" %>
 <%@ page import = "DATADB.bean.DTO" %>
+<%!
+public static int back(int q_num, int SavePage){
+	//매게변수 num은  현재 패이지에 저장된 게시물의 갯수 
+	int min = 1;
+	   
+	  if(min>q_num||q_num==min){
+		  return min;
+	  }else{
+		  return q_num-1;
+	  }
+}
 
-<html>
-<head>
-<title>게시판</title>
-<link href="style.css" rel="stylesheet" type="text/css">
-</head>
-
+public static int forward(int q_num, int SavePage){
+	int max =  SavePage;
+	//매개변수 num 현재 패이지에 저장된 게시물의 갯수 
+	if(q_num==max||q_num>max){
+		return max;
+	  }else{  
+		  return q_num+1;
+	  }
+}
+%>
 <%
    int q_num = Integer.parseInt(request.getParameter("q_num"));
    String q_pageNum = request.getParameter("q_pageNum");
+//   int pageSave = Integer.parseInt(request.getParameter("pageSave"));
+	int pageSave = Integer.parseInt(request.getParameter("pageSave"));
+   System.out.println("pageSave = "+pageSave);
+   
    
    try{
 	     DAO dbPro = DAO.getInstance();
@@ -18,14 +38,20 @@
 	  int q_ref=article.getQ_ref();
 	  int q_re_step=article.getQ_re_step();
 	  int q_re_level=article.getQ_re_level();
-	  int back = (int)(q_num - 1);
-	  int forward = (int)(q_num + 1);
-
 %>
+
+<html>
+<head>
+<title>게시판</title>
+</head>
+
+
+
+
 <body>  
 <center><b>글내용 보기</b>
 <br>
-<form>
+<form name="dd">
 <table width="800" border="1" cellspacing="0" cellpadding="0"  align="center">  
   <tr height="30">
     <td align="center" width="200">글번호</td>
@@ -84,16 +110,19 @@
 	   
 	   <input type="button" value="글목록" 
        onclick="document.location.href='list.jsp?q_pageNum=<%=q_pageNum%>'">
+
        
-       <input type="button" value="이전글" onclick="document.location.href='content.jsp?q_num=<%=back%>&q_pageNum=<%=q_pageNum%>'">
-       <input type="button" value="다음글" onclick="document.location.href='content.jsp?q_num=<%=forward%>&q_pageNum=<%=q_pageNum%>'">
+       <input type="button" value="이전글" onclick="document.location.href='content.jsp?q_num=<%=back(q_num,pageSave)%>&q_pageNum=<%=q_pageNum%>&pageSave=<%=pageSave%>'">
+       <input type="button" value="다음글" onclick="document.location.href='content.jsp?q_num=<%=forward(q_num,pageSave)%>&q_pageNum=<%=q_pageNum%>&pageSave=<%=pageSave%>'">
+       
+       
        
        <%} }else if(session.getAttribute("m_id") ==null){ %>
        <input type="button" value="글목록" 
        onclick="document.location.href='list.jsp?q_pageNum=<%=q_pageNum%>'">
        
-       <input type="button" value="이전글" onclick="document.location.href='content.jsp?q_num=<%=back%>&q_pageNum=<%=q_pageNum%>'">
-       <input type="button" value="다음글" onclick="document.location.href='content.jsp?q_num=<%=forward%>&q_pageNum=<%=q_pageNum%>'">
+       <input type="button" value="이전글" onclick="document.location.href='content.jsp?q_num=<%=back(q_num,pageSave)%>&q_pageNum=<%=q_pageNum%>&pageSave=<%=pageSave%>'">
+       <input type="button" value="다음글" onclick="document.location.href='content.jsp?q_num=<%=forward(q_num,pageSave)%>&q_pageNum=<%=q_pageNum%>&pageSave=<%=pageSave%>'">
     </td>
   </tr>
 </table>    
