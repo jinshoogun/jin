@@ -1,4 +1,4 @@
-package DATADB.bean;
+package DATADB1.bean;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -25,7 +25,6 @@ public class DAO {
 		return ds.getConnection();
 	}
 	
-	//insert()메소드
 	public void insertMembership(DTO membership){
 		Connection conn =null;
 		PreparedStatement pstmt = null;
@@ -42,7 +41,6 @@ public class DAO {
 			pstmt.setString(6,membership.getM_birth());
 			pstmt.setString(7,membership.getM_phone());
 			pstmt.setTimestamp(8,membership.getM_reg());
-			
 			
 			//쿼리실행!!
 			pstmt.executeQuery();
@@ -329,14 +327,14 @@ public class DAO {
 				return article;
 			}
 
-			public int getArticleCount() throws Exception {
+			public int getArticleCount(String sqry) throws Exception {
 				Connection conn = null;
 				PreparedStatement pstmt = null;
 				ResultSet rs = null;
 				int x=0;
 				try {
 					conn = getConnection();
-					pstmt = conn.prepareStatement("select count(*) from QnA");
+					pstmt = conn.prepareStatement("select count(*) from QnA" + sqry);
 					rs = pstmt.executeQuery();
 					if (rs.next()) {
 						x= rs.getInt(1); 
@@ -351,22 +349,20 @@ public class DAO {
 				return x; 
 			}
 			
-			
-			public List getArticles(int start, int end) throws Exception {
+			public List getArticles(int start, int end, String sqry) throws Exception {
 				Connection conn = null;
 				PreparedStatement pstmt = null;
 				ResultSet rs = null;
 				List articleList=null;
+				String sql="";
+				String col="";
 				try {
+					
 					conn = getConnection();
-					pstmt = conn.prepareStatement(
-							"select q_num, q_writer,q_subject,q_password2,q_reg_date,q_ref,q_re_step, q_re_level, q_content,q_readcount,r "
-							+
-							"from (select q_num, q_writer,q_subject, q_password2,q_reg_date, q_ref, q_re_step,q_re_level, q_content, q_readcount,rownum r " +
-							"from (select q_num,q_writer,q_subject, q_password2, q_reg_date,q_ref, q_re_step, q_re_level, q_content, q_readcount " +
-							"from qnA order by q_ref desc, q_re_step asc) order by q_ref desc, q_re_step asc ) where r >= ? and r <= ? ");
-							pstmt.setInt(1, start); 
-							pstmt.setInt(2, end); 
+					col = "q_num, q_writer,q_subject,q_password2,q_reg_date,q_ref,q_re_step, q_re_level, q_content,q_readcount";
+					pstmt = conn.prepareStatement("select "+col+" from ( select "+col+", rownum r"+" from ( select "+col+" from qna "+sqry+" order by q_ref desc, q_re_step asc) ) where r between ? and ?");	//	public List getArticles(int start, int end, String sqry) throws Exception {
+					pstmt.setInt(1, start);
+					pstmt.setInt(2, end);
 
 							rs = pstmt.executeQuery();
 							if (rs.next()) {

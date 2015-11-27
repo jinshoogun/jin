@@ -1,6 +1,6 @@
 <%@ page contentType = "text/html; charset=euc-kr" %>
-<%@ page import = "DATADB.bean.DAO" %>
-<%@ page import = "DATADB.bean.DTO" %>
+<%@ page import = "DATADB1.bean.DAO" %>
+<%@ page import = "DATADB1.bean.DTO" %>
 <%@ page import = "java.util.List" %>
 <%@ page import = "java.text.SimpleDateFormat" %>
 
@@ -15,18 +15,28 @@
     if (q_pageNum == null) {
         q_pageNum = "1";
     }
-
+	String skey = request.getParameter("skey");
+	String sval = request.getParameter("sval");
+	String sqry = "";
+	String pageReturn = "";
+	if (skey != null && sval != null){
+		pageReturn = "&skey="+skey+"&sval="+sval;
+		sqry = " where "+skey+" like '%"+sval+"%' ";
+	}else{
+		skey = "m_id";
+		sval = "";
+	}
     int currentPage = Integer.parseInt(q_pageNum);
     int startRow = (currentPage - 1) * pageSize + 1; // ((currentPage - 1) * pageSize )+ 1; 와 같으뮤
     int endRow = currentPage * pageSize;
     int count = 0;
     int number=0;
-
+    
     List articleList = null;
     DAO dbPro = DAO.getInstance();
-    count = dbPro.getArticleCount();
+    count = dbPro.getArticleCount(sqry);
     if (count > 0) {
-        articleList = dbPro.getArticles(startRow, endRow);
+        articleList = dbPro.getArticles(startRow, endRow, sqry);
     }
 
 	number=count-(currentPage-1)*pageSize;
@@ -59,7 +69,7 @@
 <table width="700" border="1" cellpadding="0" cellspacing="0">
 <tr>
     <td align="center">
-    게시판에 저장된 글이 없습니다.
+ 글이 없습니다.
     </td>
 </table>
 
@@ -79,7 +89,6 @@
 %>
    <tr height="30">
     <td align="center"  width="50" > <%=number--%></td>
-    								<!--    -->
     <td  width="250" >
 	<%
 	      int wid=0; 
@@ -126,6 +135,22 @@
         }
     }
 %>
+	<form method="get" action="list.jsp" name="searchForm">
+	<table>
+		<tr>
+		<td align="right">
+		<select name="skey">
+			<OPTION value="q_writer" <%=(skey.equals("q_writer"))?"selected":""%>>아이디</OPTION>
+			<OPTION value="q_subject" <%=(skey.equals("q_subject"))?"selected":""%>>제목</OPTION>
+			<OPTION value="q_content" <%=(skey.equals("q_content"))?"selected":""%>>글내용</OPTION>
+		</select>
+		<input type=text name="sval" value="<%=sval%>">
+		<input type=submit value="검색">
+		<%=(!sval.equals(""))?"<a href=\"list.jsp\">원래대로</a>":""%>
+		    <td align="right"><input type="button" value="이전"
+				onclick="window.location='main.jsp'"></td>
+		</tr>
+	</table>
 </center>
 </body>
 </html>

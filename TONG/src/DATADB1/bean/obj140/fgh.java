@@ -1,4 +1,4 @@
-package DATADB.bean.obj140;
+package DATADB1.bean.obj140;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

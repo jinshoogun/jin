@@ -1,10 +1,9 @@
 <%@ page contentType="text/html;charset=utf-8" %>
-<%@ page import = "DATADB.bean.DAO" %>
+<%@ page import = "DATADB1.bean.DAO" %>
 
 <% 
 
 request.setCharacterEncoding("euc-kr");%>
-
 <%
   //request 내부객체 - 클라이언트의 요청정보를 WAS가 전달해줌
   //              - 무조건 String !
