@@ -3,6 +3,8 @@ package DATADB.bean;
 import java.sql.Timestamp;
 
 public class DTO {
+	
+    //member
 	private String m_id;
 	private String m_password; 
 	private String m_name;
@@ -11,17 +13,154 @@ public class DTO {
 	private String m_birth;
 	private String m_phone;
 	private Timestamp m_reg;
-	private int q_num;
-	private String q_writer;
-	private String q_subject;
-	private String q_content;
-	private String q_password2; // 게시판 비번
-	private Timestamp q_reg_date;
-	private int q_readcount;
-	private int q_ref;
-	private int q_re_step;
-	private int q_re_level;
 	
+	//notice
+	private int n_num; 
+    private String n_writer;
+    private String n_subject;
+    private String n_content;
+    private String n_password;
+    private int n_readcount;
+    private Timestamp n_reg_date;
+    private int n_ref;
+    private int n_re_step;	
+    private int n_re_level;
+    
+    //event
+    private int e_num; 
+    private String e_writer;
+    private String e_subject;
+    private String e_content;
+    private String e_password;
+    private int e_readcount;
+    private Timestamp e_reg_date;
+    private int e_ref;
+    private int e_re_step;	
+    private int e_re_level;
+    
+    
+    public int getE_num() {
+		return e_num;
+	}
+	public void setE_num(int e_num) {
+		this.e_num = e_num;
+	}
+	public String getE_writer() {
+		return e_writer;
+	}
+	public void setE_writer(String e_writer) {
+		this.e_writer = e_writer;
+	}
+	public String getE_subject() {
+		return e_subject;
+	}
+	public void setE_subject(String e_subject) {
+		this.e_subject = e_subject;
+	}
+	public String getE_content() {
+		return e_content;
+	}
+	public void setE_content(String e_content) {
+		this.e_content = e_content;
+	}
+	public String getE_password() {
+		return e_password;
+	}
+	public void setE_password(String e_password) {
+		this.e_password = e_password;
+	}
+	public int getE_readcount() {
+		return e_readcount;
+	}
+	public void setE_readcount(int e_readcount) {
+		this.e_readcount = e_readcount;
+	}
+	public Timestamp getE_reg_date() {
+		return e_reg_date;
+	}
+	public void setE_reg_date(Timestamp e_reg_date) {
+		this.e_reg_date = e_reg_date;
+	}
+	public int getE_ref() {
+		return e_ref;
+	}
+	public void setE_ref(int e_ref) {
+		this.e_ref = e_ref;
+	}
+	public int getE_re_step() {
+		return e_re_step;
+	}
+	public void setE_re_step(int e_re_step) {
+		this.e_re_step = e_re_step;
+	}
+	public int getE_re_level() {
+		return e_re_level;
+	}
+	public void setE_re_level(int e_re_level) {
+		this.e_re_level = e_re_level;
+	}
+    
+    
+	public int getN_num() {
+		return n_num;
+	}
+	public void setN_num(int n_num) {
+		this.n_num = n_num;
+	}
+	public String getN_writer() {
+		return n_writer;
+	}
+	public void setN_writer(String n_writer) {
+		this.n_writer = n_writer;
+	}
+	public String getN_subject() {
+		return n_subject;
+	}
+	public void setN_subject(String n_subject) {
+		this.n_subject = n_subject;
+	}
+	public String getN_content() {
+		return n_content;
+	}
+	public void setN_content(String n_content) {
+		this.n_content = n_content;
+	}
+	public String getN_password() {
+		return n_password;
+	}
+	public void setN_password(String n_password) {
+		this.n_password = n_password;
+	}
+	public Timestamp getN_reg_date() {
+		return n_reg_date;
+	}
+	public void setN_reg_date(Timestamp n_reg_date) {
+		this.n_reg_date = n_reg_date;
+	}
+	public int getN_readcount() {
+		return n_readcount;
+	}
+	public void setN_readcount(int n_readcount) {
+		this.n_readcount = n_readcount;
+	}
+	public int getN_ref() {
+		return n_ref;
+	}
+	public void setN_ref(int n_ref) {
+		this.n_ref = n_ref;
+	}
+	public int getN_re_step() {
+		return n_re_step;
+	}
+	public void setN_re_step(int n_re_step) {
+		this.n_re_step = n_re_step;
+	}
+	public int getN_re_level() {
+		return n_re_level;
+	}
+	public void setN_re_level(int n_re_level) {
+		this.n_re_level = n_re_level;
+	}
 	
 	
 	public String getM_id() {
@@ -72,67 +211,8 @@ public class DTO {
 	public void setM_reg(Timestamp m_reg) {
 		this.m_reg = m_reg;
 	}
-	public int getQ_num() {
-		return q_num;
-	}
-	public void setQ_num(int q_num) {
-		this.q_num = q_num;
-	}
-	public String getQ_writer() {
-		return q_writer;
-	}
-	public void setQ_writer(String q_writer) {
-		this.q_writer = q_writer;
-	}
-	public String getQ_subject() {
-		return q_subject;
-	}
-	public void setQ_subject(String q_subject) {
-		this.q_subject = q_subject;
-	}
-	public String getQ_content() {
-		return q_content;
-	}
-	public void setQ_content(String q_content) {
-		this.q_content = q_content;
-	}
-	public String getQ_password2() {
-		return q_password2;
-	}
-	public void setQ_password2(String q_password2) {
-		this.q_password2 = q_password2;
-	}
-	public Timestamp getQ_reg_date() {
-		return q_reg_date;
-	}
-	public void setQ_reg_date(Timestamp q_reg_date) {
-		this.q_reg_date = q_reg_date;
-	}
-	public int getQ_readcount() {
-		return q_readcount;
-	}
-	public void setQ_readcount(int q_readcount) {
-		this.q_readcount = q_readcount;
-	}
-	public int getQ_ref() {
-		return q_ref;
-	}
-	public void setQ_ref(int q_ref) {
-		this.q_ref = q_ref;
-	}
-	public int getQ_re_step() {
-		return q_re_step;
-	}
-	public void setQ_re_step(int q_re_step) {
-		this.q_re_step = q_re_step;
-	}
-	public int getQ_re_level() {
-		return q_re_level;
-	}
-	public void setQ_re_level(int q_re_level) {
-		this.q_re_level = q_re_level;
-	}
+	
+	
 
 	
 }
-	
