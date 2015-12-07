@@ -1,0 +1,68 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<% 
+
+request.setCharacterEncoding("EUC-KR");%>
+    <%@ include file="../test2/mainform5.jsp"%>
+    <title>³²¼º Ä¿Æ®</title>
+
+<table align ="center">
+
+
+	<h1><FONT face="Comic Sans MS"><FONT color="pink"><h3>about <FONT color="aqua"
+>¸Ó</FONT><FONT color="orange">¸®</FONT><FONT Color="red">Åë</FONT></h3></FONT></h1>
+<html>
+    <body><center>
+
+    <img img src="/TONG/Image/designsoft.jpg"
+    width = "225" height="262" >
+    
+    <img src="/TONG/Image/twoblockcut.jpg"
+    width = "225" height="262" >
+    
+    <img src="/TONG/Image/mohicancut.jpg"
+    width = "225" height="262" >
+    
+    <img src="/TONG/Image/dandycut.jpg"
+    width = "225" height="262" >
+
+    <img src="/TONG/Image/garmacut.jpg"
+    width = "225" height="262" ></br></center>
+
+
+   <FONT size=+1 face="±Ã¼­" color=gray>¡¡¡¡¡¡¡¡¡¡¡¡¡¡µðÀÚÀÎ¼ÒÇÁÆ®ºí·ÏÄÆ</FONT>
+    <FONT size=+1 face="±Ã¼­" color=gray>¡¡¡¡¡¡¡¡¡¡¡¡Åõºí·°ÄÆ</FONT>
+    <FONT size=+1 face="±Ã¼­" color=gray>¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¸ðÈ÷Ä­ÄÆ</FONT>
+    <FONT size=+1 face="±Ã¼­" color=gray>¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡´íµð¸ðÈ÷Ä­ÄÆ</FONT>
+    <FONT size=+1 face="±Ã¼­" color=gray>¡¡¡¡¡¡¡¡¡¡¡¡°¡¸£¸¶¿þÀÌºêÄÆ</FONT>
+    </br>
+    
+        <center><img img src="/TONG/Image/wc1.jpg"
+    width = "225" height="262" >
+    
+    <img src="/TONG/Image/wc2.jpg"
+    width = "225" height="262" >
+    
+    <img src="/TONG/Image/wc3.jpg"
+    width = "225" height="262" >
+    
+    <img src="/TONG/Image/wc4.jpg"
+    width = "225" height="262" >
+    
+    <img src="/TONG/Image/wc5.jpg"
+    width = "225" height="262" ></br></center>
+
+
+    <FONT size=+1 face="±Ã¼­" color=gray> ¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¹Ù°¡ÁöÄÆ</FONT>
+    <FONT size=+1 face="±Ã¼­" color=gray>¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡ÂªÀº´Ü¹ßÄÆ</FONT>
+    <FONT size=+1 face="±Ã¼­" color=gray>¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¼ôÄÆ</FONT>
+    <FONT size=+1 face="±Ã¼­" color=gray>¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡ ¼ôÄÆ+Æß</FONT>
+    <FONT size=+1 face="±Ã¼­" color=gray>¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¿©¼º¸Ó½¬·ëÄÆ</FONT>
+    
+    
+                    
+    
+    
+ </body>
+ </html>
+ </table>
