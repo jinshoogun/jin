@@ -709,7 +709,12 @@ public DTO getOnebyOneArticle(int o_num) throws Exception {
 	try {
 		conn = getConnection();
 		pstmt = conn.prepareStatement(
-		"select * from OnebyOne where o_num = ?"); 
+		"update oneByOne set o_readcount=o_readcount+1 where o_num = ?"); 
+		// 조회수를 미리 올라가기 합니다. 읽었다는 증거를 하기 위해서
+		pstmt.setInt(1, o_num);
+		pstmt.executeUpdate();
+		pstmt = conn.prepareStatement(
+		"select * from oneByOne where o_num = ?"); 
 		pstmt.setInt(1, o_num);
 		rs = pstmt.executeQuery();
 		if (rs.next()) {
@@ -842,6 +847,245 @@ public int OnebyOnedeleteArticle(int o_num, String o_password2) throws Exception
 	}
 	return x;
 }
+
+public int getStyleNewsArticleCount(String sqry) throws Exception {
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	int x=0;
+	try {
+		conn = getConnection();
+		pstmt = conn.prepareStatement("select count(*) from StyleNews" + sqry);
+		rs = pstmt.executeQuery();
+		if (rs.next()) {
+			x= rs.getInt(1); 
+		}
+	} catch(Exception ex) {
+		ex.printStackTrace();
+	} finally {
+		if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+		if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+		if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+	}
+	return x; 
+}
+
+
+public List getStyleNewsArticles(int start, int end, String sqry) throws Exception {
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	List articleList=null;
+	String sql="";
+	String col="";
+	try {
+		
+		conn = getConnection();
+		col = "s_num, s_writer, s_subject,s_password2, s_reg_date, s_content,s_readcount";
+		pstmt = conn.prepareStatement("select "+col+" from ( select "+col+", rownum r"+" from ( select "+col+" from StyleNews "+sqry+" order by s_reg_date) ) where r between ? and ?");
+		pstmt.setInt(1, start);
+		pstmt.setInt(2, end);
+
+				rs = pstmt.executeQuery();
+				if (rs.next()) {
+					articleList = new ArrayList(end); 
+					do{ 
+						DTO article= new DTO();
+						article.setS_num(rs.getInt("s_num"));
+						article.setS_writer(rs.getString("s_writer"));
+						article.setS_subject(rs.getString("s_subject"));
+						article.setS_password(rs.getString("s_password2"));
+						article.setS_reg_date(rs.getTimestamp("s_reg_date"));
+						article.setS_readcount(rs.getInt("s_readcount"));
+						article.setS_content(rs.getString("s_content"));
+						articleList.add(article); 
+					}while(rs.next());
+				}
+	} catch(Exception ex) {
+		ex.printStackTrace();
+	} finally {
+		if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+		if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+		if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+	}
+
+	
+	return articleList;
+	
+}
+public DTO getStyleNewsArticle(int s_num) throws Exception {
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	DTO article=null;
+	try {
+		conn = getConnection();
+		pstmt = conn.prepareStatement(
+		"update stylenews set s_readcount=s_readcount+1 where s_num = ?"); 
+		// 조회수를 미리 올라가기 합니다. 읽었다는 증거를 하기 위해서
+		pstmt.setInt(1, s_num);
+		pstmt.executeUpdate();
+		pstmt = conn.prepareStatement(
+		"select * from stylenews where s_num = ?"); 
+		pstmt.setInt(1, s_num);
+		rs = pstmt.executeQuery();
+		if (rs.next()) {
+			article = new DTO();
+			article.setS_num(rs.getInt("s_num"));
+			article.setS_writer(rs.getString("s_writer"));
+			article.setS_subject(rs.getString("s_subject"));
+			article.setS_password(rs.getString("s_password"));
+			article.setS_readcount(rs.getInt("s_readcount"));
+			article.setS_reg_date(rs.getTimestamp("s_reg_date"));
+			article.setS_content(rs.getString("s_content"));
+		}
+	} catch(Exception ex) {
+		ex.printStackTrace();
+	} finally {
+		if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+		if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+		if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+	}
+	
+	return article;
+}
+
+public void insertStyleNewsArticle(DTO article) throws Exception {
+	
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	int s_num=article.getS_num();
+	int number=0;
+	
+	String sql="";
+	try {
+		conn = getConnection(); 	
+		sql = "insert into StyleNews(s_num, s_writer, s_subject, s_content, s_password, ";
+		sql+="s_readcount, s_reg_date) values(Style_seq.NEXTVAL,?,?,?,?,sysdate)";
+			pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, article.getS_writer());
+		pstmt.setString(2, article.getS_subject());
+		pstmt.setString(3, article.getS_content());
+		pstmt.setString(4, article.getS_password());
+		pstmt.setInt(5, article.getS_readcount());
+		pstmt.executeUpdate();
+
+	} catch(Exception ex) {
+		ex.printStackTrace();
+	} finally {
+		if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+		if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+		if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+	}
+}
+
+public DTO updateStyleNewsGetArticle(int s_num) throws Exception {
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	DTO article=null;
+	try {
+		conn = getConnection();
+		pstmt = conn.prepareStatement(
+		"select * from StyleNews where s_num = ?"); 
+		pstmt.setInt(1, s_num);
+		rs = pstmt.executeQuery();
+		if (rs.next()) {
+			article = new DTO();
+			article.setS_num(rs.getInt("s_num"));
+			article.setS_writer(rs.getString("s_writer"));
+			article.setS_subject(rs.getString("s_subject"));
+			article.setS_password(rs.getString("s_password"));
+			article.setS_reg_date(rs.getTimestamp("q_reg_date"));
+			article.setS_readcount(rs.getInt("s_readcount"));
+			article.setS_content(rs.getString("s_content"));
+		}
+	} catch(Exception ex) {
+		ex.printStackTrace();
+	} finally {
+		if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+		if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+		if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+	}
+
+	return article;
+}
+
+
+public int updateStyleNewsArticle(DTO article) throws Exception {
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs= null;
+	String dbpasswd="";
+	String sql="";
+	int x=-1;
+	try {
+		conn = getConnection();
+		pstmt = conn.prepareStatement(
+		"select s_password from StyleNews where s_num = ?");
+		pstmt.setInt(1, article.getS_num());
+		rs = pstmt.executeQuery();
+		if(rs.next()){
+			dbpasswd= rs.getString("s_password"); 
+			if(dbpasswd.equals(article.getS_password())){
+				sql="update StyleNews set s_subject=?, s_password=?";
+				sql+=",s_content=? where s_num=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1,  article.getS_subject());
+				pstmt.setString(2, article.getS_password());
+				pstmt.setString(3, article.getS_content());
+				pstmt.setInt(4, article.getS_num());
+				pstmt.executeUpdate();
+				x= 1;
+			}else{
+				x= 0;
+			}
+		}
+	} catch(Exception ex) {
+		ex.printStackTrace();
+	} finally {
+		if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+		if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+		if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+	}
+	return x;
+	
+}
+
+public int deleteStyleNewsArticle(int s_num, String s_password) throws Exception {
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs= null;
+	String dbpasswd="";
+	int x=-1;
+	try {
+		conn = getConnection();
+		pstmt = conn.prepareStatement(
+		"select s_password from StyleNews where s_num = ?");
+		pstmt.setInt(1, s_num);
+		rs = pstmt.executeQuery();
+		if(rs.next()){
+			dbpasswd= rs.getString("s_password");
+			if(dbpasswd.equals(s_password)){
+				pstmt = conn.prepareStatement(
+				"delete from StyleNews where s_num=?");
+				pstmt.setInt(1, s_num);
+				pstmt.executeUpdate();
+				x= 1; 
+			}else
+				x= 0; 
+		}
+	} catch(Exception ex) {
+		ex.printStackTrace();
+	} finally {
+		if (rs != null) try { rs.close(); } catch(SQLException ex) {}
+		if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
+		if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+	}
+	return x;
+}
+
 	}
 
 

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-
+    <%@ include file="../test2/mainform5.jsp"%>
     <title>¿©¼º Ä¿Æ®</title>
 
 <table align ="center">
@@ -11,24 +11,24 @@
 <html>
     <body>
 
-    <img img src="C:\Users\user2\Desktop\ÇÁ·ÎÁ§Æ®\¿©¼ºÄ¿Æ®»çÁø\¿©ÀÚÆß\±½Àº¿þÀÌºêÆß.jpg"
-    width = "200" height="350" >
+    <center><img img src="/TONG/Image/wp1.jpg"
+    width = "225" height="262" >
     
-    <img src="C:\Users\user2\Desktop\ÇÁ·ÎÁ§Æ®\¿©¼ºÄ¿Æ®»çÁø\¿©ÀÚÆß\´Ü¹ß¸Ó¸®Æß.jpg"
-    width = "200" height="350" >
+    <img src="/TONG/Image/wp2.jpg"
+    width = "225" height="262" >
     
-    <img src="C:\Users\user2\Desktop\ÇÁ·ÎÁ§Æ®\¿©¼ºÄ¿Æ®»çÁø\¿©ÀÚÆß\µðÁöÅÐ¼¼ÆÃÆß.jpg"
-    width = "200" height="350" >
+    <img src="/TONG/Image/wp3.jpg"
+    width = "225" height="262" >
     
-    <img src="C:\Users\user2\Desktop\ÇÁ·ÎÁ§Æ®\¿©¼ºÄ¿Æ®»çÁø\¿©ÀÚÆß\¹ß·ÕÆß.jpg"
-    width = "200" height="350" >
+    <img src="/TONG/Image/wp4.jpg"
+    width = "225" height="262" >
     
-    <img src="C:\Users\user2\Desktop\ÇÁ·ÎÁ§Æ®\¿©¼ºÄ¿Æ®»çÁø\¿©ÀÚÆß\¾ÆÀÌ·ÕÆß.jpg"
-    width = "200" height="350" ></br>
+    <img src="/TONG/Image/wp5.jpg"
+    width = "225" height="262" ></br></center>
 
 
-    <FONT size=+1 face="±Ã¼­" color=gray> ¡¡±½Àº¿þÀÌºêÆß</FONT>
+    <FONT size=+1 face="±Ã¼­" color=gray>¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡±½Àº¿þÀÌºêÆß</FONT>
     <FONT size=+1 face="±Ã¼­" color=gray>¡¡¡¡¡¡¡¡¡¡¡¡¡¡´Ü¹ß¸Ó¸®Æß</FONT>
-    <FONT size=+1 face="±Ã¼­" color=gray> ¡¡¡¡¡¡¡¡¡¡µðÁöÅÐ¼¼ÆÃÆß</FONT>
-    <FONT size=+1 face="±Ã¼­" color=gray>¡¡¡¡¡¡¡¡¡¡¡¡ ¹ß·ÕÆß</FONT>
-    <FONT size=+1 face="±Ã¼­" color=gray> ¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¾ÆÀÌ·ÕÆß</FONT>
+    <FONT size=+1 face="±Ã¼­" color=gray>¡¡¡¡¡¡¡¡¡¡¡¡¡¡µðÁöÅÐ¼¼ÆÃÆß</FONT>
+    <FONT size=+1 face="±Ã¼­" color=gray>¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¹ß·ÕÆß</FONT>
+    <FONT size=+1 face="±Ã¼­" color=gray>¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¾ÆÀÌ·ÕÆß</FONT>

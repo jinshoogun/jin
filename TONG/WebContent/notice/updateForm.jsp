@@ -1,6 +1,7 @@
 <%@ page contentType = "text/html; charset=euc-kr" %>
-<%@ page import = "DATADB.bean.nDAO" %>
-<%@ page import = "DATADB.bean.DTO" %>
+<%@ page import = "DATADB2.bean.nDAO" %>
+<%@ page import = "DATADB2.bean.DTO" %>
+<%@ include file="../test2/noticemainform.jsp"  %>
 <html>
 <head>
 <title>°Ô½ÃÆÇ</title>

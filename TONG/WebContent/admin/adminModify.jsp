@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
+<% 
+
+request.setCharacterEncoding("EUC-KR");%>
 <%@ page import="adminDATADB.bean.DAO"%>
 <%@ page import="adminDATADB.bean.DTO"%>
 <%@ page import="java.util.List"%>
@@ -26,11 +29,11 @@
 	
 %>
 <center>
-	<b>관리자 정보입니다. (전체 관리자 계정:<%=count%>)
+	<b>관리자 정보입니다. (전체 관리자 계정:<%=count-1%>)
 	</b>
 
 	<%
-		if (count == 0) {
+		if (count == 1) {
 	%>
 	<table width="600" border="1" cellpadding="0" cellspacing="0">
 		<tr>

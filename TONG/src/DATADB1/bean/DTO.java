@@ -31,9 +31,57 @@ public class DTO {
 	private int o_ref;
 	private int o_re_step;
 	private int o_re_level;
+	private int s_num;
+	private String s_writer;
+	private String s_subject;
+	private String s_content;
+	private String s_password; // 게시판 비번
+	private Timestamp s_reg_date;
+	private int s_readcount;
 	
 	
-	
+	public int getS_num() {
+		return s_num;
+	}
+	public void setS_num(int s_num) {
+		this.s_num = s_num;
+	}
+	public String getS_writer() {
+		return s_writer;
+	}
+	public void setS_writer(String s_writer) {
+		this.s_writer = s_writer;
+	}
+	public String getS_subject() {
+		return s_subject;
+	}
+	public void setS_subject(String s_subject) {
+		this.s_subject = s_subject;
+	}
+	public String getS_content() {
+		return s_content;
+	}
+	public void setS_content(String s_content) {
+		this.s_content = s_content;
+	}
+	public String getS_password() {
+		return s_password;
+	}
+	public void setS_password(String s_password) {
+		this.s_password = s_password;
+	}
+	public Timestamp getS_reg_date() {
+		return s_reg_date;
+	}
+	public void setS_reg_date(Timestamp s_reg_date) {
+		this.s_reg_date = s_reg_date;
+	}
+	public int getS_readcount() {
+		return s_readcount;
+	}
+	public void setS_readcount(int s_readcount) {
+		this.s_readcount = s_readcount;
+	}
 	public int getO_num() {
 		return o_num;
 	}

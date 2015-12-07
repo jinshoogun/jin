@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@ page import="adminDATADB.bean.DAO"%>
-
-<% request.setCharacterEncoding("euc-kr");%>
+<%@ include file = "../test2/mainform7.jsp" %>
+<% request.setCharacterEncoding("EUC-KR");%>
 
 <%
     String id = request.getParameter("a_id");

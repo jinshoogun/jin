@@ -1,5 +1,6 @@
-<%@ page contentType="text/html;charset=euc-kr" %>
-<%@ page import = "DATADB.bean.nDAO" %>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@ page import = "DATADB2.bean.nDAO" %>
 <%@ page import = "java.sql.Timestamp" %>
 
 <% request.setCharacterEncoding("euc-kr");%>

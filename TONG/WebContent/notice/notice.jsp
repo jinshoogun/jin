@@ -1,8 +1,10 @@
-<%@ page contentType = "text/html; charset=euc-kr" %>
-<%@ page import = "DATADB.bean.nDAO" %>
-<%@ page import = "DATADB.bean.DTO" %>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@ page import = "DATADB2.bean.nDAO" %>
+<%@ page import = "DATADB2.bean.DTO" %>
 <%@ page import = "java.util.List" %>
 <%@ page import = "java.text.SimpleDateFormat" %>
+<%@ include file="../test2/noticemainform.jsp"  %>
 
 <%!
     int pageSize = 10;
@@ -15,17 +17,6 @@
     if (pageNum == null) {
         pageNum = "1";
     }
-	String skey = request.getParameter("skey");
-	String sval = request.getParameter("sval");
-	String sqry = "";
-	String pageReturn = "";
-	if (skey != null && sval != null){
-		pageReturn = "&skey="+skey+"&sval="+sval;
-		sqry = " where "+skey+" like '%"+sval+"%' ";
-	}else{
-		skey = "a_id";
-		sval = "";
-	}
 
     int currentPage = Integer.parseInt(pageNum);
     int startRow = (currentPage - 1) * pageSize + 1;
@@ -35,13 +26,12 @@
 
     List articleList = null;
     nDAO dbPro = nDAO.getInstance();
-    count = dbPro.getArticleCount(sqry);
+    count = dbPro.getArticleCount();
     if (count > 0) {
-        articleList = dbPro.getArticles(startRow, endRow, sqry);
+        articleList = dbPro.getArticles(startRow, endRow);
     }
 
 	number=count-(currentPage-1)*pageSize;
-	int pageSave = number;
 %>
 <html>
 <head>
@@ -57,6 +47,7 @@
     <%if(session.getAttribute("a_id")!=null) 
     
     {%>
+    
     <a href="writeForm.jsp">글쓰기</a>
     <%} else { %>
     <%}%>
@@ -88,22 +79,20 @@
 %>
    <tr height="30">
     <td align="center"  width="50" > <%=number--%></td>
-    <td  width="250" >
+    
 	<%
 	      int wid=0; 
 	      if(article.getN_re_level()>0){
 	        wid=5*(article.getN_re_level());
 	%>
-	  <img src="images/level.gif" width="<%=wid%>" height="16">
-	  <img src="images/re.gif">
+	  <td  width="250"  width="<%=wid%>" height="16">
+	
 	<%}else{%>
-	  <img src="images/level.gif" width="<%=wid%>" height="16">
+	   <td width="250"  width="<%=wid%>" height="16">
 	<%}%>
            
       <a href="content.jsp?n_num=<%=article.getN_num()%>&pageNum=<%=currentPage%>">
-           <%=article.getN_subject()%></a> 
-          <% if(article.getN_readcount()>=20){%>
-         <img src="images/hot.gif" border="0"  height="16"><%}%> </td>
+           <%=article.getN_subject()%></a> </td>
     <td align="center"  width="100"> 
        <a align="center"  width="100"><%=article.getN_writer()%></a></td>
     <td align="center"  width="150"><%= sdf.format(article.getN_reg_date())%></td>
@@ -112,6 +101,7 @@
      <%}%>
 </table>
 <%}%>
+
 <%
     if (count > 0) {
         int pageCount = count / pageSize + ( count % pageSize == 0 ? 0 : 1);
@@ -133,22 +123,7 @@
 <%
         }
     }
-%>	<form method="get" action="notice.jsp" name="searchForm">
-	<table>
-		<tr>
-		<td align="right">
-		<select name="skey">
-			<OPTION value="n_writer" <%=(skey.equals("n_writer"))?"selected":""%>>아이디</OPTION>
-			<OPTION value="n_subject" <%=(skey.equals("n_subject"))?"selected":""%>>제목</OPTION>
-			<OPTION value="n_content" <%=(skey.equals("n_content"))?"selected":""%>>글내용</OPTION>
-		</select>
-		<input type=text name="sval" value="<%=sval%>">
-		<input type=submit value="검색">
-		<%=(!sval.equals(""))?"<a href=\"notice.jsp\">원래대로</a>":""%>
-		    <td align="right"><input type="button" value="이전"
-				onclick="window.location='main.jsp'"></td>
-		</tr>
-	</table>
+%>
 </center>
 </body>
 </html>

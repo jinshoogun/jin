@@ -1,5 +1,6 @@
-<%@ page contentType="text/html;charset=euc-kr" %>
-
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@ include file="../test2/noticemainform.jsp"  %>
 <%
   int n_num = Integer.parseInt(request.getParameter("n_num"));
   String pageNum = request.getParameter("pageNum");

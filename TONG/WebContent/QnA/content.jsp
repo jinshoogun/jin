@@ -1,8 +1,14 @@
-<%@page import="javafx.scene.control.Alert"%>
-<%@ page contentType = "text/html; charset=euc-kr" %>
-<%@ page import = "DATADB.bean.DAO" %>
-<%@ page import = "DATADB.bean.DTO" %>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@ page import = "DATA.bean.DAO" %>
+<%@ page import = "DATA.bean.DTO" %>
+<%@ page import = "java.text.SimpleDateFormat" %>
+    <%@ include file="../test2/mainform5.jsp"%>
 <%!
+
+SimpleDateFormat sdf = 
+new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
 public static int back(int q_num, int SavePage){
 	//매게변수 num은  현재 패이지에 저장된 게시물의 갯수 
 	int min = 1;
@@ -29,7 +35,6 @@ public static int forward(int q_num, int SavePage){
    String q_pageNum = request.getParameter("q_pageNum");
 //   int pageSave = Integer.parseInt(request.getParameter("pageSave"));
 	int pageSave = Integer.parseInt(request.getParameter("pageSave"));
-   System.out.println("pageSave = "+pageSave);
    
    
    try{
@@ -49,7 +54,7 @@ public static int forward(int q_num, int SavePage){
 
 
 <body>  
-<center><b>글내용 보기</b>
+<center><b>QnA</b>
 <br>
 <form name="dd">
 <table width="800" border="1" cellspacing="0" cellpadding="0"  align="center">  
@@ -67,7 +72,7 @@ public static int forward(int q_num, int SavePage){
 	     <%=article.getQ_writer()%></td>
     <td align="center" width="200" >작성일</td>
     <td align="center" width="200" align="center">
-	     <%=article.getQ_reg_date()%></td>
+	     <%=sdf.format(article.getQ_reg_date())%></td>
   </tr>
   <tr height="30">
     <td align="center" width="200">글제목</td>
@@ -76,7 +81,7 @@ public static int forward(int q_num, int SavePage){
   </tr>
   <tr>
     <td align="center" width="200">글내용</td>
-    <td align="left" width="600" height = "500" colspan="3"><textarea rows="95%" cols="95%" readonly><%=article.getQ_content()%></textarea></td>
+    <td align="left" width="150" height = "350" colspan="3"><%=article.getQ_content()%></textarea></td>
   </tr>
   <tr height="30">      
     <td colspan="4" align="right" > 

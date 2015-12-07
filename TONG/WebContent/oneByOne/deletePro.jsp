@@ -1,9 +1,11 @@
-<%@ page contentType="text/html;charset=euc-kr" %>
-<%@ page import = "DATADB.bean.DAO" %>
-<%@ page import = "DATADB.bean.DTO" %>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@ page import = "DATA.bean.DAO" %>
+<%@ page import = "DATA.bean.DTO" %>
 <%@ page import = "java.sql.Timestamp" %>
-
-<% request.setCharacterEncoding("euc-kr");%>
+    <%@ include file="../test2/mainform5.jsp"%>
+<%
+request.setCharacterEncoding("EUC-KR"); %>
 
 <%
   int o_num = Integer.parseInt(request.getParameter("o_num"));

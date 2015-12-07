@@ -1,10 +1,11 @@
-<%@ page contentType="text/html;charset=euc-kr" %>
-<%@ page import = "DATADB.bean.nDAO" %>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@ page import = "DATADB2.bean.nDAO" %>
 <%@ page import = "java.sql.Timestamp" %>
 
 <% request.setCharacterEncoding("euc-kr");%>
 
-<jsp:useBean id="article" scope="page" class="DATADB.bean.DTO">
+<jsp:useBean id="article" scope="page" class="DATADB2.bean.DTO">
    <jsp:setProperty name="article" property="*"/>
 </jsp:useBean>
  

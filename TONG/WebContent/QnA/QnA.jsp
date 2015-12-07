@@ -1,7 +1,9 @@
-<%@ page contentType = "text/html; charset=euc-kr" %>
-<%@ page import = "DATADB.bean.DAO" %>
-<%@ page import = "DATADB.bean.DTO" %>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@ page import = "DATA.bean.DAO" %>
+<%@ page import = "DATA.bean.DTO" %>
 <%@ page import = "java.text.SimpleDateFormat" %>
+    <%@ include file="../test2/mainform5.jsp"%>
 
 <html>
 <head>

@@ -1,9 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" %>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<% 
+
+request.setCharacterEncoding("EUC-KR");%>
 
 
 <html>
 <head></head><title>È¸¿øÅ»Åð</title>
-
+<img  src="C:\Users\¼Ò¿µ\Desktop\JAVA\TONG\WebContent\Image\Tong1.jpg" width="150"
+		height="100">
 
 <script language="javascript"></script>
 

@@ -5,7 +5,7 @@
 <%@ page import="java.sql.PreparedStatement"%>
 <%@ page import="java.sql.ResultSet"%>
 <%
-	request.setCharacterEncoding("euc-kr");
+	request.setCharacterEncoding("EUC-KR");
 
 	Class.forName("oracle.jdbc.driver.OracleDriver");
 

@@ -1,7 +1,8 @@
-<%@ page contentType="text/html;charset=euc-kr" %>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <%@ page import = "DATADB.bean.DAO" %>
 <%@ page import = "DATADB.bean.DTO" %>
-
+    <%@ include file="../test2/mainform5.jsp"%>
 <%
   int q_num = Integer.parseInt(request.getParameter("q_num"));
   String q_pageNum = request.getParameter("q_pageNum");

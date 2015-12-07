@@ -1,15 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+   pageEncoding="EUC-KR"%>
+<% 
+
+request.setCharacterEncoding("EUC-KR");%>
+<%@ include file = "../test2/mainform7.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
 </head>
 <body>
 <center>
-<form method="post" action="adminProc.jsp">
-<table border=1>
+<script language="javaScript">
+	function checkinput(admininput) {
+		var admininput = eval("document.admininput")
+		if (!admininput.a_id.value) {
+			alert("아이디를 다시 입력하세요");
+			return false;
+		}
+		if (!admininput.a_password.value) {
+			alert("비밀번호를 다시 입력하세요");
+			return false;
+		}
+	}
+</script>
+<form method="post" name = admininput action="adminProc.jsp"  onSubmit = "return checkinput(this.form)">
+
+<table border=1 align = "center">
 <tr>
-  <td colspan=2 align=center>* 인트라넷 (관리자) 로그인 *</td>
+  <td colspan=2 align="center">* 인트라넷 (관리자) 로그인 *</td>
 </tr>
 <tr>
   <td>아이디</td>

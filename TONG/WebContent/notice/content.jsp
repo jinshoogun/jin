@@ -1,7 +1,9 @@
-<%@ page contentType = "text/html; charset=euc-kr" %>
-<%@ page import = "DATADB.bean.nDAO" %>
-<%@ page import = "DATADB.bean.DTO" %>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@ page import = "DATADB2.bean.nDAO" %>
+<%@ page import = "DATADB2.bean.DTO" %>
 <%@ page import = "java.text.SimpleDateFormat" %>
+<%@ include file="../test2/noticemainform.jsp"  %>
 <html>
 <head>
 <title>게시판</title>
@@ -53,13 +55,13 @@
   </tr>
   <tr>
     <td align="center" width="125"  >글내용</td>
-    <td align="left" width="375" colspan="3"><pre><%=article.getN_content()%></pre></td>
+     <td align="left" width="150" height = "350" colspan="3"><%=article.getN_content()%></td>
   </tr>
   <tr height="30">      
     <td colspan="4"   align="right" > 
-    <%if(session.getAttribute("m_id")!=null) {%>
+    <%if(session.getAttribute("a_id")!=null) {%>
 	    <%
-	         String id = (String)session.getAttribute("m_id");
+	         String id = (String)session.getAttribute("a_id");
 	         if(id.equals(article.getN_writer())){
 	    %>
 	  <input type="button" value="글수정" 
@@ -92,7 +94,7 @@
        <input type="button" value="이전글" onclick="document.location.href='content.jsp?n_num=<%=back%>&pageNum=<%=pageNum%>'">
        <input type="button" value="다음글" onclick="document.location.href='content.jsp?n_num=<%=forward%>&pageNum=<%=pageNum%>'">
        
-       <%} }else if(session.getAttribute("m_id") ==null){ %>
+       <%} }else if(session.getAttribute("a_id") ==null){ %>
        <input type="button" value="글목록" 
        onclick="document.location.href='notice.jsp?pageNum=<%=pageNum%>'">
        

@@ -1,3 +1,4 @@
+
 package adminDATADB.bean;
 
 import java.sql.*;
@@ -44,7 +45,7 @@ public class DAO {
 		        	if(x < 16){
 		        		NumberFormat numformat = NumberFormat.getIntegerInstance();
 		        		numformat.setMinimumIntegerDigits(2);
-			pstmt = conn.prepareStatement("insert into Administrator values(?,?,'FV215b_183',?,'master@HeadTong.co.kr', '2015-12-04', '02-111-1111')");		
+			pstmt = conn.prepareStatement("insert into Administrator values(?,?,default,?,default,default,Sysdate)");		
 			pstmt.setString(1, (numformat.format(x)));
 			pstmt.setString(2, "Admin"+(numformat.format(x)));
 			pstmt.setString(3, "°ü¸®ÀÚ"+(numformat.format(x)));

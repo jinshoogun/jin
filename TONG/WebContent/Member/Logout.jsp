@@ -1,6 +1,6 @@
 <%
 
    session.invalidate(); 
-   response.sendRedirect("main.jsp"); 
+   response.sendRedirect("MainForm.jsp"); 
    
    %>

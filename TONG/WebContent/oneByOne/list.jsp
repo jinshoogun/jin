@@ -1,9 +1,12 @@
-<%@ page contentType="text/html; charset=euc-kr"%>
-<%@ page import="DATADB.bean.DAO"%>
-<%@ page import="DATADB.bean.DTO"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@ page import="DATA.bean.DAO"%>
+<%@ page import="DATA.bean.DTO"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.text.SimpleDateFormat"%>
-
+    <%@ include file="../test2/mainform5.jsp"%>
+<%
+request.setCharacterEncoding("EUC-KR"); %>
 <%!int pageSize = 10; //한화면에 보여줄 글 갯수
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");%>
 
@@ -125,11 +128,7 @@
 			</tr>
 		</table>
 		<%}} else {%>
-		<table width="800">
-			<tr>
-				<td align="right"><a href="loginFrom.jsp">로그인</a></td>
-			</tr>
-		</table>
+
 		<table width="800" border="1" cellpadding="0" cellspacing="0">
 			<tr height="40">
 		

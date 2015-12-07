@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<% 
 
+request.setCharacterEncoding("EUC-KR");%>
+    <%@ include file="../test2/mainform5.jsp"%>
     <title>³²¼º Ä¿Æ®</title>
 
 <table align ="center">
@@ -11,27 +14,27 @@
 <html>
     <body>
 
-    <img img src="C:\work space\TONG\WebContent\Image\CÄÃº¼·ý¸ÅÁ÷.png"
-    width = "200" height="350" >
+   <center> <img img src="/TONG/Image/m1.png"
+    width = "225" height="262" >
     
-    <img src="C:\work space\TONG\WebContent\Image\±ä¸Ó¸®º¼·ý¸ÅÁ÷.jpg"
-    width = "200" height="350" >
+    <img src="/TONG/Image/m2.jpg"
+    width = "225" height="262" >
     
-    <img src="C:\work space\TONG\WebContent\Image\´íµð¸ÅÁ÷.jpg"
-    width = "200" height="350" >
+    <img src="/TONG/Image/m3.jpg"
+    width = "225" height="262" >
     
-    <img src="C:\work space\TONG\WebContent\Image\º¼·ý¸ÅÁ÷.jpg"
-    width = "200" height="350" >
+    <img src="/TONG/Image/m4.jpg"
+    width = "225" height="262" >
     
-    <img src="C:\work space\TONG\WebContent\Image\½ºÆ®·¹ÀÌÆ®Æß.jpg"
-    width = "200" height="350" ></br>
+    <img src="/TONG/Image/m5.jpg"
+    width = "225" height="262" ></br></center>
 
 
-    <FONT size=+1 face="±Ã¼­" color=gray>¡¡¡¡CÄÃº¼·ý¸ÅÁ÷</FONT>
-    <FONT size=+1 face="±Ã¼­" color=gray>¡¡¡¡¡¡¡¡¡¡¡¡±ä¸Ó¸®º¼·ý¸ÅÁ÷</FONT>
-    <FONT size=+1 face="±Ã¼­" color=gray> ¡¡¡¡¡¡¡¡¡¡¡¡´íµð¸ÅÁ÷</FONT>
-    <FONT size=+1 face="±Ã¼­" color=gray>¡¡¡¡¡¡¡¡¡¡¡¡º¼·ý¸ÅÁ÷</FONT>
-    <FONT size=+1 face="±Ã¼­" color=gray> ¡¡¡¡¡¡¡¡¡¡¡¡ ½ºÆ®·¹ÀÌÆ®Æß</FONT>
+    <FONT size=+1 face="±Ã¼­" color=gray>¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡CÄÃº¼·ý¸ÅÁ÷</FONT>
+    <FONT size=+1 face="±Ã¼­" color=gray>¡¡¡¡¡¡¡¡¡¡¡¡¡¡±ä¸Ó¸®º¼·ý¸ÅÁ÷</FONT>
+    <FONT size=+1 face="±Ã¼­" color=gray>¡¡¡¡¡¡¡¡¡¡¡¡¡¡´íµð¸ÅÁ÷</FONT>
+    <FONT size=+1 face="±Ã¼­" color=gray>¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡º¼·ý¸ÅÁ÷</FONT>
+    <FONT size=+1 face="±Ã¼­" color=gray>¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡½ºÆ®·¹ÀÌÆ®Æß</FONT>
                     
     
     

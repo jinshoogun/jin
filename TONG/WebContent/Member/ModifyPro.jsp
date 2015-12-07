@@ -1,11 +1,11 @@
-<%@ page contentType="text/html;charset=euc-kr"%>
+<%@ page contentType="text/html;charset=EUC-KR" pageEncoding="EUC-KR"%>
+<% 
+
+request.setCharacterEncoding("EUC-KR");%>
 <%@ page import="DATADB.bean.DAO"%>
 <%@ page import="DATADB.bean.DTO" %>
 
 
-<%
-	request.setCharacterEncoding("euc-kr");
-%>
 
 <jsp:useBean id="membership" class="DATADB.bean.DTO">
 	<jsp:setProperty name="membership" property="*" />

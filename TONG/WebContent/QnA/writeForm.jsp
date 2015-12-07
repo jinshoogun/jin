@@ -1,6 +1,8 @@
-<%@ page contentType="text/html; charset=euc-kr" %>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <%@ page import = "DATADB.bean.DAO" %>
 <%@ page import = "DATADB.bean.DTO" %>
+    <%@ include file="../test2/mainform5.jsp"%>
 <html>
 <head>
 <title>게시판</title>
@@ -43,7 +45,7 @@
    
     <td  width="70"  align="center">이 름</td>
     <td  width="330">
-       <input type="text" size="10" maxlength="20" name="q_writer"></td>
+       <input type="hidden" name="q_writer" value="<%=id%>"><%=id%></td>
   </tr>
   <tr>
     <td  width="70"  align="center" >제 목</td>
@@ -56,8 +58,8 @@
   </tr>
   <tr>
     <td  width="70"  align="center" >내 용</td>
-    <td  width="330" >
-     <textarea name="q_content" rows="13" cols="40"></textarea> </td>
+    <td align="left" width="150" height = "350" colspan="3">
+     <textarea name="q_content" rows="26" cols="70"></textarea> </td>
   </tr>
   <tr>
     <td  width="70"  align="center" >비밀번호</td>

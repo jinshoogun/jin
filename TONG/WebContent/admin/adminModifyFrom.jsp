@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<% 
+
+request.setCharacterEncoding("EUC-KR");%>
 <%@ page import="adminDATADB.bean.DAO"%>
 <%@ page import="adminDATADB.bean.DTO"%>
 <%
@@ -43,7 +46,7 @@
     <tr> 
       <td  width="200">사용자 이름</td>
       <td  width="500"> 
-        <%=dto.getA_name()%>
+          <input type="text" name="a_name" size="40" maxlength="30" value="<%=dto.getA_name()%>">
       </td>
     </tr>
    <tr> 

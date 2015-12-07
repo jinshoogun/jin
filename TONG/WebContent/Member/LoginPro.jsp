@@ -1,31 +1,32 @@
-<%@ page contentType="text/html;charset=utf-8" %>
-<%@ page import = "DATADB1.bean.DAO" %>
-
+<%@ page contentType="text/html;charset=EUC-KR" pageEncoding="EUC-KR"%>
 <% 
 
-request.setCharacterEncoding("euc-kr");%>
+request.setCharacterEncoding("EUC-KR");%>
+<%@ page import = "DATADB.bean.DAO" %>
+
+
 <%
-  //request ë‚´ë¶€ê°ì²´ - í´ë¼ì´ì–¸íŠ¸ì˜ ìš”ì²­ì •ë³´ë¥¼ WASê°€ ì „ë‹¬í•´ì¤Œ
-  //              - ë¬´ì¡°ê±´ String !
-  //request ë‚´ë¶€ê°ì²´ ë©”ì†Œë“œ : ì´ë¦„ì´ idì¸ íŒŒë¼ë¯¸í„°ì— í•´ë‹¹í•˜ëŠ” ê°’ì„ ë¦¬í„´í•´ì¤€ë‹¤.
-    String id = request.getParameter("m_id"); //idì™€ pwë¥¼ ê°€ì ¸ì˜¨ë‹¤
+  //request ³»ºÎ°´Ã¼ - Å¬¶óÀÌ¾ðÆ®ÀÇ ¿äÃ»Á¤º¸¸¦ WAS°¡ Àü´ÞÇØÁÜ
+  //              - ¹«Á¶°Ç String !
+  //request ³»ºÎ°´Ã¼ ¸Þ¼Òµå : ÀÌ¸§ÀÌ idÀÎ ÆÄ¶ó¹ÌÅÍ¿¡ ÇØ´çÇÏ´Â °ªÀ» ¸®ÅÏÇØÁØ´Ù.
+    String id = request.getParameter("m_id"); //id¿Í pw¸¦ °¡Á®¿Â´Ù
 	String password  = request.getParameter("m_password");
-	//DB id,pw í™•ì¸ - DAO.java ì—ì„œì˜ userCheck()ë©”ì†Œë“œ
+	//DB id,pw È®ÀÎ - DAO.java ¿¡¼­ÀÇ userCheck()¸Þ¼Òµå
 	DAO membership = DAO.getInstance();
     int check= membership.userCheck(id, password);
-    System.out.println(":aaaaaa"+check);
-	if(check==1){  // userCheck()ì—ì„œ 1ì„ë°˜í™˜ì‹œ ì¸ì¦ì„±ê³µ, 0ì€ ë¹„ë°€ë²ˆí˜¸í‹€ë¦¼, -1ì€í•´ë‹¹ì•„ì´ë””ì—†ìŒ
+   
+	if(check==1){  // userCheck()¿¡¼­ 1À»¹ÝÈ¯½Ã ÀÎÁõ¼º°ø, 0Àº ºñ¹Ð¹øÈ£Æ²¸², -1ÀºÇØ´ç¾ÆÀÌµð¾øÀ½
 		session.setAttribute("m_id",id);
-		response.sendRedirect("main.jsp");
+		response.sendRedirect("../test2/mainform6.jsp");
 	}else if(check==0){%>
 	<script> 
-	  alert("ë¹„ë°€ë²ˆí˜¸ê°€ ë§žì§€ ì•ŠìŠµë‹ˆë‹¤.");
+	  alert("ºñ¹Ð¹øÈ£°¡ ¸ÂÁö ¾Ê½À´Ï´Ù.");
      
-      //ë°±ìŠ¤íŽ˜ì´ìŠ¤ 
+      //¹é½ºÆäÀÌ½º 
 	</script>
 <%	}else{ %>
 	<script>
-	  alert("ì•„ì´ë””ê°€ ë§žì§€ ì•ŠìŠµë‹ˆë‹¤..");
+	  alert("¾ÆÀÌµð°¡ ¸ÂÁö ¾Ê½À´Ï´Ù..");
 	  
 	 
 	</script>
