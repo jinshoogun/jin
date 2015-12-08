@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import test.mvc.action.FormAction;
+import test.mvc.action.TestAction;
+
 public class Controller extends HttpServlet {
 	// public void service(HttpServletRequest request, HttpServletResponse
 	// response)throws ServletException{
@@ -34,28 +37,21 @@ public class Controller extends HttpServlet {
       String uri = request.getRequestURI(); //ex)jsp/form.naver = >URI
       //http://localhost:8080/ |jsp/form.naver| = >URI
       String view;
+      try {
       if (uri.equals("/jsp/form.naver")){
-    	  view = "/12_07/form.jsp";
+    	  FormAction fa = new FormAction();
+    	  view = fa.execute(request, response);
       }else {
-    	  String id = request.getParameter("id");
-    	  String pw = request.getParameter("pw");
-    	  //DAO
-    	  HttpSession session = request.getSession(); 
-    	  //jsp로 세션 연결시 내부 객체라 바로 적으면 되나 Controll상에서는 바로 적는 것을 불가능 하므로 HttpSession을 통해 생성
-    	  request.setAttribute("memId", "1");
-    	  session.setAttribute("memId", "2");
-    	  // 중복시 사용범위에 따라 좁은 범위가 우선적으로 사용한다.
-    	  request.setAttribute("pw", pw);
-    	  view = "/12_07/test.jsp";
+    	  TestAction ta = new TestAction();
+    	  view = ta.execute(request, response);
       }
-      
           RequestDispatcher rd = request.getRequestDispatcher(view);
 		//RequestDispatcher rd = request.getRequestDispatcher("/12_07/test.jsp");
 //		request.setAttribute("msg", "hello");
 //		request.setAttribute("num", 10000);
-		try {
+		
 			rd.forward(request, response);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
