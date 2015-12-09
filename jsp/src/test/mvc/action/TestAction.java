@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-public class TestAction {
+public class TestAction implements SuperAction{
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
   	  String id = request.getParameter("id");
   	  String pw = request.getParameter("pw");

@@ -6,6 +6,10 @@
 	<servlet>
 		<servlet-name>mvc</servlet-name>
 		<servlet-class>test.mvc.controller.Controller</servlet-class>
+		<init-param>
+		<param-name>propertiesPath</param-name>
+		<param-value>C:\Users\user2\git1\jsp\WebContent\WEB-INF\command.properties</param-value>
+		</init-param>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>mvc</servlet-name>
