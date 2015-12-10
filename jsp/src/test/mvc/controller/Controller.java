@@ -19,6 +19,7 @@ public class Controller extends HttpServlet {
 private Map actionMap = null;
 	public void init(ServletConfig config) throws ServletException {
 		String path = config.getInitParameter("propertiesPath");
+		System.out.println(path);
 		Properties p = new Properties();
 		InputStream is = null;
 		actionMap = new HashMap();

@@ -15,4 +15,16 @@
 		<servlet-name>mvc</servlet-name>
 		<url-pattern>*.naver</url-pattern>
 	</servlet-mapping>
+	<servlet>
+	<servlet-name>mvc1</servlet-name>
+		<servlet-class>test.mvc.q1.controller.ControllerAction</servlet-class>
+		<init-param>
+		<param-name>propertiesPath</param-name>
+		<param-value>C:\Users\user2\git1\jsp\WebContent\WEB-INF\command.properties</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>mvc1</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
 </web-app>

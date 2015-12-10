@@ -26,7 +26,7 @@ if(session.getAttribute("memId")==null){
        <tr>
           <td colspan="3" align="center">
             <input type="submit" name="Submit" value="로그인"> <%-- 입력된 결과를 submit을 통해 loginPro에게 전달합니다. --%>
-            <input type="button"  value="회원가입" onclick="javascript:window.location='q1.jsp'">
+            <input type="button"  value="회원가입" onclick="window.location='q1.do'">
             <%-- submit가 이미 로그인버튼에 사용되었기 때문에 onclick을 통해 q1.jsp로 전달을 하게 됩니다. --%>
           </td></form></tr></table>
      <%}else{%> <%-- x = -1인 경우 값을 받게 되면 로그인 상태로 들어오게 됩니다. --%>
