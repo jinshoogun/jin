@@ -46,15 +46,15 @@ private Map actionMap = null;
 
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 		
-		String uri = request.getRequestURI();
-		SuperAction sa = (SuperAction)actionMap.get(uri);
-		String view = "";
-		try{
-			view = sa.execute(request, response);
-			RequestDispatcher rd = request.getRequestDispatcher(view);
-			rd.forward(request, response);
-		} catch (Exception e){
-			e.printStackTrace();
-		}	
-	}
-}
+		String uri = request.getRequestURI(); 
+		SuperAction sa = (SuperAction)actionMap.get(uri); 
+ 		String view = ""; 
+ 		try{ 
+			view = sa.execute(request, response); 
+			RequestDispatcher rd = request.getRequestDispatcher(view); 
+ 			rd.forward(request, response); 
+ 		} catch (Exception e){ 
+			e.printStackTrace(); 
+ 		}	 
+ 	} 
+ } 

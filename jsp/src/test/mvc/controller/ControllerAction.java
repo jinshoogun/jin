@@ -6,16 +6,15 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import test.mvc.action.CommandAction;
 
-import test.mvc.action.SuperAction;
-
-public class ControllerAction {
+public class ControllerAction extends HttpServlet{
 	
 private Map actionMap = null;
 	public void init(ServletConfig config) throws ServletException {
@@ -47,15 +46,17 @@ private Map actionMap = null;
 
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 		
-		String uri = request.getRequestURI();
-		SuperAction sa = (SuperAction)actionMap.get(uri);
-		String view = "";
-		try{
-			view = sa.execute(request, response);
-			RequestDispatcher rd = request.getRequestDispatcher(view);
-			rd.forward(request, response);
-		} catch (Exception e){
-			e.printStackTrace();
-		}	
-	}
-}
+		String uri = request.getRequestURI(); 
+		System.out.println(uri);
+		CommandAction com = (CommandAction)actionMap.get(uri); 
+ 		String view = ""; 
+ 		try{
+ 			view = com.execute(request, response); 
+ 			System.out.println(view);
+ 			RequestDispatcher rd = request.getRequestDispatcher(view); 
+ 			rd.forward(request, response); 
+ 		} catch (Exception e){ 
+ 			e.printStackTrace(); 
+ 		}	 
+ 	} 
+ } 
