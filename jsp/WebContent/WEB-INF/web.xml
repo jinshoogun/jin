@@ -17,7 +17,7 @@
 	</servlet-mapping>
 	<servlet>
 	<servlet-name>mvc1</servlet-name>
-		<servlet-class>test.mvc.q1.controller.ControllerAction</servlet-class>
+		<servlet-class>test.mvc.controller.ControllerAction</servlet-class>
 		<init-param>
 		<param-name>propertiesPath</param-name>
 		<param-value>C:\Users\user2\git1\jsp\WebContent\WEB-INF\command.properties</param-value>
