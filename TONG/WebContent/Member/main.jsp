@@ -1,4 +1,7 @@
-<%@ page contentType="text/html; charset=euc-kr"%>
+<%@ page contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<% 
+
+request.setCharacterEncoding("EUC-KR");%>
 
 <html>
 <head>
@@ -24,7 +27,7 @@
 			return false;
 		}
 		if (!InputForm.m_password.value) {
-			alert("아이디를 입력하세요..");
+			alert("패스워드를 입력하세요..");
 			InputForm.m_password.focus();
 			return false;
 		}
@@ -36,8 +39,8 @@
 	<%
 		// <body onLoad="함수명();"> 해당 함수를 부른다.
 	%>
-	<table width=500 cellpadding="10" cellspacing="0" align="center"
-		border="1">
+	<table width=500 cellpadding="0" cellspacing="0" align="center"
+		border="2">
 		<tr>
 			<td width="300" bgcolor=#FFA2A2 height="20">&nbsp;</td>
 
@@ -52,7 +55,7 @@
 					size="15" maxlength="10"></td>
 		</tr>
 		<tr>
-			<td rowspan="2" bgcolor=#FFE8FF width="300">머리통 로그인 ----></td>
+			<td rowspan="2" bgcolor=#FFE8FF width="300">LOGIN</td>
 			<td bgcolor=#C3ED60 width="100" align="right">패스워드</td>
 			<td width="100" bgcolor=#5CD1E5><input type="password"
 				name="m_password" size="15" maxlength="10"></td>
@@ -61,7 +64,11 @@
 			<td colspan="3" bgcolor="silver" align="center"><input
 				type="submit" name="Submit" value="로그인"> <input
 				type="button" value="회원가입"
-				onclick="javascript:window.location='InputForm.jsp'"></td>
+				onclick="javascript:window.location='AllinputForm.jsp'">
+				<input type="button" value="아이디찾기"
+					onclick="javascript:window.location='SearchidForm.jsp'">
+					<input type="button" value="비밀번호찾기"
+					onclick="javascript:window.location='SearchpwForm.jsp'"></td>
 			</form>
 		</tr>
 	</table>

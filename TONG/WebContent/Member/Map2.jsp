@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+   pageEncoding="EUC-KR"%>
+<% 
+
+request.setCharacterEncoding("EUC-KR");%> pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +19,8 @@
 </head>
 <body>
 <img  src="C:\Users\소영\Desktop\JAVA\TONG\WebContent\Image\Tong1.jpg" width="150"
-		height="100">
+		height="100"><br/>
+<font size="5"  ><b>오시는길</b></font>		
 <HR width=100% size=4 color=red> 
 
 <div id="map" style="width:100%;height:350px;"  align="left"></div>
@@ -81,7 +85,7 @@ var customOverlay = new daum.maps.CustomOverlay({
  <br />
 
 
-<input  align="justify" type="submit" name="Submit" value="머리통 예약페이지로" onclick="javascript:window.location='main.jsp'">
+<input  align="justify" type="submit" name="Submit" value="머리통 예약페이지로" onclick="javascript:window.location='MainForm.jsp'">
 </div>
 
 

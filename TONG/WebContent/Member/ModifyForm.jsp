@@ -1,4 +1,8 @@
-<%@ page contentType="text/html;charset=euc-kr"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+   pageEncoding="EUC-KR"%>
+<% 
+
+request.setCharacterEncoding("EUC-KR");%>
 
 <%@ page import="DATADB.bean.DAO"%>
 <%@ page import="DATADB.bean.DTO"%>
@@ -8,6 +12,8 @@
 <head>
 <title>회원정보수정</title>
 <link href="style.css" rel="stylesheet" type="text/css">
+<img  src="C:\Users\소영\Desktop\JAVA\TONG\WebContent\Image\Tong1.jpg" width="150"
+		height="100">
 
 <% String id= (String)session.getAttribute("m_id");
 
@@ -66,7 +72,6 @@
 			 <td colspan="2" align="center" bgcolor="white">
 			 <input type="submit" name="modify" value="수정">
 			 <input type="button" value="취소" onclick="javascript:window.location='main.jsp'">
-			 <input type="button" value="탈퇴" onclick="javascript:window.location='DeleteForm.jsp'">
 			 </td>
 			 </tr>
 			 </table>

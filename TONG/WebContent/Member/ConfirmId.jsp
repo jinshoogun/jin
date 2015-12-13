@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=euc-kr"%>
+<%@ page contentType="text/html;charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import="DATADB.bean.DAO"%>
 
 
@@ -7,7 +7,7 @@
 <title>중복확인</title>
 <link href="style.css" rel="stylesheet" type="text/css">
 
-<% request.setCharacterEncoding("euc-kr"); %>
+<% request.setCharacterEncoding("EUC-KR"); %>
 
 <%
 

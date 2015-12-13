@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-
+    <%@ include file="../test2/mainform5.jsp"%>
     <title>여성매직</title>
 
 <table align ="center">
@@ -11,27 +11,27 @@
 <html>
     <body>
 
-    <img img src="C:\work space\TONG\WebContent\Image\긴생머리매직.jpg"
-    width = "200" height="350" >
+    <center><img img src="/TONG/Image/wm1.jpg"
+    width = "225" height="262" >
     
-    <img src="C:\work space\TONG\WebContent\Image\단발볼륨매직.jpg"
-    width = "200" height="350" >
+    <img src="/TONG/Image/wm2.jpg"
+    width = "225" height="262" >
     
-    <img src="C:\work space\TONG\WebContent\Image\여성매직.jpg"
-    width = "200" height="350" >
+    <img src="/TONG/Image/wm3.jpg"
+    width = "225" height="262" >
     
-    <img src="C:\work space\TONG\WebContent\Image\볼륨매직.jpg"
-    width = "200" height="350" >
+    <img src="/TONG/Image/wm4.jpg"
+    width = "225" height="262" >
     
-    <img src="C:\work space\TONG\WebContent\Image\볼륨매직2.jpg"
-    width = "200" height="350" ></br>
+    <img src="/TONG/Image/wm5.jpg"
+    width = "225" height="262" ></br></center>
 
 
-    <FONT size=+1 face="궁서" color=gray> 　　　긴생머리매직</FONT>
-    <FONT size=+1 face="궁서" color=gray>　　　　단발볼륨매직</FONT>
-    <FONT size=+1 face="궁서" color=gray> 　　　　　　여성매직</FONT>
-    <FONT size=+1 face="궁서" color=gray>　　　　　　　 볼륨매직</FONT>
-    <FONT size=+1 face="궁서" color=gray> 　　　　　　ㅍㅍ약간긴볼륨매직</FONT>
+    <FONT size=+1 face="궁서" color=gray>　　　　　　　　긴생머리매직</FONT>
+    <FONT size=+1 face="궁서" color=gray>　　　　　　　단발볼륨매직</FONT>
+    <FONT size=+1 face="궁서" color=gray>　　　　　　　　여성매직</FONT>
+    <FONT size=+1 face="궁서" color=gray>　　　　　　　　볼륨매직</FONT>
+    <FONT size=+1 face="궁서" color=gray>　　　　　　　약간긴볼륨매직</FONT>
                     
     
     
