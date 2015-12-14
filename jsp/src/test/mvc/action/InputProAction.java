@@ -3,14 +3,13 @@ package test.mvc.action;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import ch11.logon.LogonDBBean;
 import ch11.logon.LogonDataBean;
 
 public class InputProAction implements CommandAction {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 		try {
-	   request.setCharacterEncoding("euc-kr");
+	   
 		
 	   LogonDBBean manager = LogonDBBean.getInstance();
 	 

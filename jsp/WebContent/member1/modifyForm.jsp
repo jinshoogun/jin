@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=euc-kr" %>
 <%@ page import = "ch11.logon.*" %>
 <%@ include file="/view/color.jsp"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <html>
 <head>
@@ -8,45 +10,8 @@
 <link href="style.css" rel="stylesheet" type="text/css">
 
 
-<script language="JavaScript">
-   <!-- 
-    function checkIt() {
-        var userinput = eval("document.userinput");
-               
-        if(!userinput.passwd.value ) {
-            alert("비밀번호를 입력하세요");
-            return false;
-        }
-        if(userinput.passwd.value != userinput.passwd2.value)
-        {
-            alert("비밀번호를 동일하게 입력하세요");
-            return false;
-        }
-       
-        if(!userinput.username.value) {
-            alert("사용자 이름을 입력하세요");
-            return false;
-        }
-        if(!userinput.jumin1.value  || !userinput.jumin2.value )
-        {
-            alert("주민등록번호를 입력하세요");
-            return false;
-        }
-    }
--->
-</script>
-
-<%
-    String id = (String)session.getAttribute("memId");
-   
-    LogonDBBean manager = LogonDBBean.getInstance();
-    LogonDataBean c = manager.getMember(id);
-
-	try{
-%>
-
 <body bgcolor="<%=bodyback_c%>">
-<form method="post" action="modifyPro.jsp" name="userinput" onsubmit="return checkIt()">
+<form method="post" action="modifyPro.do" name="userinput" onsubmit="return checkIt()">
 
   <table width="600" border="1" cellspacing="0" cellpadding="3"  align="center">
     <tr > 
@@ -63,13 +28,14 @@
 
     <tr> 
       <td  width="200"> 사용자 ID</td>
-      <td  width="400"><%=c.getId()%></td>
+      <td  width="400"> <input type ="hidden" name = "id" value = "${id}" />
+      <c:out value  = "${id}" /></td>
     </tr>
     
      <tr> 
       <td width="200"> 비밀번호</td>
       <td width="400"> 
-        <input type="password" name="passwd" size="10" maxlength="10" value="<%=c.getPasswd()%>">
+        <input type="password" name="passwd" size="10" maxlength="10" value="${passwd}" >
       </td>
     <tr>  
     <tr> 
@@ -79,43 +45,45 @@
     <tr> 
       <td   width="200">사용자 이름</td>
       <td  width="400"> 
-        <input type="text" name="name" size="15" maxlength="20" value="<%=c.getName()%>">
+        <input type="text" name="name" size="15" maxlength="20" value="${name}" >
       </td>
     </tr>
     <tr> 
       <td width="200">주민등록번호</td>
       <td width="400"> 
-        <%=c.getJumin1()%>-<%=c.getJumin2()%>
+        <c:out value  = "${Jumin1}" />- <c:out value  = "${Jumin2}" />
       </td>
     </tr>
    <tr> 
       <td width="200">E-Mail</td>
       <td width="400">
-	    <%if(c.getEmail()==null){%>
+      <c:if test= "${Email==null}">
 		  <input type="text" name="email" size="40" maxlength="30" >
-		<%}else{%>
-          <input type="text" name="email" size="40" maxlength="30" value="<%=c.getEmail()%>">	
-		<%}%>
+		  </c:if>
+		<c:if test = "${Email!=null}">
+          <input type="text" name="email" size="40" maxlength="30" value="${Email}">
+           </c:if>
       </td>
     </tr>
+   
     <tr> 
       <td width="200">Blog</td>
       <td width="400"> 
-	    <%if(c.getBlog()==null){%>
+	    <c:if test= "${blog==null}">
 		  <input type="text" name="blog" size="60" maxlength="50" >
-		<%}else{%>
-          <input type="text" name="blog" size="60" maxlength="50" value="<%=c.getBlog()%>">
-		<%}%>
+		</c:if>
+		 <c:if test= "${blog!=null}">
+          <input type="text" name="blog" size="60" maxlength="50" value="${blog}">
+		</c:if>
       </td>
     </tr>      
     <tr> 
       <td colspan="2" align="center" bgcolor="<%=value_c%>"> 
        <input type="submit" name="modify" value="수   정" >
-       <input type="button" value="취  소" onclick="javascript:window.location='main.jsp'">      
+       <input type="button" value="취  소" onclick="javascript:window.location='main.do'">      
       </td>
     </tr>
   </table>
 </form>
 </body>
-<%}catch(Exception e){}%>
 </html>

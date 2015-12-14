@@ -7,6 +7,7 @@
 <link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <c:if test="${id == null}">
+<!-- test는 조건물의 속성 -->
 <script language="javascript" src = "script.js"></script>
 </head>
 <body onLoad="focusIt();" bgcolor="<%=bodyback_c%>">

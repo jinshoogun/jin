@@ -9,17 +9,18 @@ import ch11.logon.LogonDBBean;
 
 public class LoginProAction implements CommandAction {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-		
-	    String id = request.getParameter("id");
-		String passwd  = request.getParameter("passwd");
+
+		String id = request.getParameter("id");
+		String passwd = request.getParameter("passwd");
 
 		LogonDBBean manager = LogonDBBean.getInstance();
-	    try {
-			int check= manager.userCheck(id,passwd);
-			if (check == 1){
+		try {
+			int check = manager.userCheck(id, passwd);
+			if (check == 1) {
 				HttpSession session = request.getSession();
 				session.setAttribute("memId", id);
-				request.setAttribute("check", check);
+				request.setAttribute("check", new Integer(check));
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

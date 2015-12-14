@@ -2,13 +2,14 @@
 <web-app xmlns="http://java.sun.com/xml/ns/javaee"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
                         http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="WebApp_ID" version="2.5">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="WebApp_ID"
+	version="2.5">
 	<servlet>
 		<servlet-name>mvc</servlet-name>
 		<servlet-class>test.mvc.controller.Controller</servlet-class>
 		<init-param>
-		<param-name>propertiesPath</param-name>
-		<param-value>C:\Users\user2\git1\jsp\WebContent\WEB-INF\command.properties</param-value>
+			<param-name>propertiesPath</param-name>
+			<param-value>C:\Users\user2\git1\jsp\WebContent\WEB-INF\command.properties</param-value>
 		</init-param>
 	</servlet>
 	<servlet-mapping>
@@ -16,11 +17,11 @@
 		<url-pattern>*.naver</url-pattern>
 	</servlet-mapping>
 	<servlet>
-	<servlet-name>mvc1</servlet-name>
+		<servlet-name>mvc1</servlet-name>
 		<servlet-class>test.mvc.controller.ControllerAction</servlet-class>
 		<init-param>
-		<param-name>propertiesPath</param-name>
-		<param-value>C:\Users\user2\git1\jsp\WebContent\WEB-INF\command.properties</param-value>
+			<param-name>propertiesPath</param-name>
+			<param-value>C:\Users\user2\git1\jsp\WebContent\WEB-INF\command.properties</param-value>
 		</init-param>
 	</servlet>
 	<servlet-mapping>
