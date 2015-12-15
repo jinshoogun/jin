@@ -1,4 +1,4 @@
-package login.model;
+package login2.model;
 
 public class UserInfo {
 	private String name;

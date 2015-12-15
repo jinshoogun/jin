@@ -1,9 +1,7 @@
-package login.model;
+package login2.dao;
 
 public class UserInfo {
 	private String name;
-	private String addr;
-	private String tel;
 	private String id;
 	private String pwd;
 	
@@ -25,18 +23,4 @@ public class UserInfo {
 	public void setName (String name){
 	 this.name = name;
 	}
-	public String getAddr(){
-		return addr;
-	}
-	public void setAddr(String addr){
-		this.addr = addr;
-	}
-	public String getTel(){
-		return tel;
-	}
-	public void setTel(String tel){
-		this.tel = tel;
-	}
-	
-
 }
