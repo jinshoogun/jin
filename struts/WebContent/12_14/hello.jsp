@@ -4,7 +4,9 @@
 
 <h2>Hello Struts2~~~!!</h2>
 <font size = "6">
-msg : ${msg}<br/>
-num : ${num}<br/>
+id : ${id}<br/>
+pw : ${pw}<br/>
+age : ${age}<br/>
+addr : ${addr}<br/>
 
 </font>

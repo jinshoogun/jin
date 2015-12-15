@@ -11,9 +11,8 @@
 			<!--http://localhost:8080/struts/hello(=name).action -->
 			<!-- success return -> result -->
 			<!-- <interceptor-ref name="params"></interceptor-ref> parameter is input interceptor(Now is skipped)-->
-			<interceptor-ref name="test"></interceptor-ref>
-			<result name = "success">/12_15/a.jsp</result>
-			<result name = "ok">/12_15/b.jsp</result>
+			<interceptor-ref name="servletConfig" />
+			<result>/12_14/hello.jsp</result>
 			<!-- HelloAction.java line 8 included -->
 		</action>
 	</package>
