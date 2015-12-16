@@ -9,7 +9,7 @@
 			<interceptor name="test" class="test.interceptor.TestInterceptor" />
 			<interceptor name="dao" class="test.interceptor.DAOInterceptor"></interceptor>
 		</interceptors>
-		<action name="hello" class="test.action.HelloAction"> 
+		<action name="hello" class="test.action.HelloAction">
 			<interceptor-ref name="dao" />
 			<interceptor-ref name="params" />
 			<result>/12_14/hello.jsp</result>
@@ -50,7 +50,8 @@
 	</package>
 	<package name="struts5" extends="struts-default">
 		<interceptors>
-			<interceptor name="loginDao" class="login2.interceptor.LoginDAOInterceptor"></interceptor>
+			<interceptor name="loginDao"
+				class="login2.interceptor.LoginDAOInterceptor"></interceptor>
 		</interceptors>
 		<action name="login1" class="login2.action.LoginAction">
 			<interceptor-ref name="prepare"></interceptor-ref>
@@ -59,6 +60,19 @@
 			<interceptor-ref name="loginDao"></interceptor-ref>
 			<result>/interceptor/login2/login_ok.jsp</result>
 			<result name="login">/interceptor/login2/login.jsp</result>
+		</action>
+		<action name="a" class="test.action.AAction">
+			<result type="redirects-action">b</result>
+		</action>
+		<action name="b" class="test.action.BAction">
+			<result>/12_16/b.jsp</result>
+		</action>
+		<action name="download" class="test.action.DownloadAction">
+			<result type="stream">
+				<param name="inputName">inputStream</param>
+				<param name="contentDisposition">attachment; filename=${fileName}</param>
+				<param name="bufferSize">10240000</param>
+			</result>
 		</action>
 	</package>
 </struts>
