@@ -7,16 +7,12 @@
 	<package name="test" extends="struts-default">
 		<interceptors>
 			<interceptor name="test" class="test.interceptor.TestInterceptor" />
-		</interceptors> <!-- interceptor is do first Action tag! -->
-		<action name="hello" class="test.action.HelloAction"> <!-- HelloAction.java line 5 included -->
-			<!--http://localhost:8080/struts/hello(=name).action -->
-			<!-- success return -> result -->
-			<!-- <interceptor-ref name="params"></interceptor-ref> parameter is input 
-				interceptor(Now is skipped) -->
-			<interceptor-ref name="fileUpload" />
+			<interceptor name="dao" class="test.interceptor.DAOInterceptor"></interceptor>
+		</interceptors>
+		<action name="hello" class="test.action.HelloAction"> 
+			<interceptor-ref name="dao" />
 			<interceptor-ref name="params" />
 			<result>/12_14/hello.jsp</result>
-			<!-- HelloAction.java line 8 included -->
 		</action>
 	</package>
 	<package name="strut2" extends="struts-default">
@@ -27,20 +23,20 @@
 			<interceptor-ref name="prepare" />
 			<interceptor-ref name="modelDriven" />
 			<interceptor-ref name="params" />
-			<result>/save_ok.jsp</result>
-			<result name="error">/error.jsp</result>
+			<result>/struts2_userinput/save_ok.jsp</result>
+			<result name="error">/struts2_userinput/error.jsp</result>
 		</action>
 	</package>
 	<package name="strut3" extends="struts-default">
 		<interceptors>
 			<interceptor name="mytimer" class="interceptor.Timer"></interceptor>
 		</interceptors>
-		<action name="add" class="interceptor1.SumAction">
+		<action name="add" class="login.interceptor.SumAction">
 			<interceptor-ref name="mytimer"></interceptor-ref>
 			<interceptor-ref name="prepare"></interceptor-ref>
 			<interceptor-ref name="modelDriven"></interceptor-ref>
 			<interceptor-ref name="params"></interceptor-ref>
-			<result>/result.jsp</result>
+			<result>/interceptor/result.jsp</result>
 		</action>
 	</package>
 	<package name="struts4" extends="struts-default">
@@ -48,21 +44,21 @@
 			<interceptor-ref name="prepare" />
 			<interceptor-ref name="modelDriven" />
 			<interceptor-ref name="params" />
-			<result>/login/login_ok.jsp</result>
-			<result name="login">/login/login.jsp</result>
+			<result>/interceptor/login/login_ok.jsp</result>
+			<result name="login">/interceptor/login/login.jsp</result>
 		</action>
 	</package>
 	<package name="struts5" extends="struts-default">
 		<interceptors>
 			<interceptor name="loginDao" class="login2.interceptor.LoginDAOInterceptor"></interceptor>
 		</interceptors>
-		<action name="login" class="login2.action.LoginAction">
+		<action name="login1" class="login2.action.LoginAction">
 			<interceptor-ref name="prepare"></interceptor-ref>
 			<interceptor-ref name="modelDriven"></interceptor-ref>
 			<interceptor-ref name="params"></interceptor-ref>
 			<interceptor-ref name="loginDao"></interceptor-ref>
-			<result>/login2/login_ok.jsp</result>
-			<result name="login">/login2/login.jsp</result>
+			<result>/interceptor/login2/login_ok.jsp</result>
+			<result name="login">/interceptor/login2/login.jsp</result>
 		</action>
 	</package>
 </struts>
