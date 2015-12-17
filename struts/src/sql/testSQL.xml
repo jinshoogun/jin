@@ -2,21 +2,27 @@
 <!DOCTYPE sqlMap PUBLIC '-//ibatis.apache.org//DTD Sql Map 2.0//EN' 
 							'http://ibatis.apache.org/dtd/sql-map-2.dtd'>
 <sqlMap>
-	<typeAlias alias="dto" type="test.action.TestDTO"/>
+	<typeAlias alias="dto" type="test.action.TestDTO" />
 	<resultMap id="dtoRes" class="dto">
 		<result property="id" column="id" />
 		<result property="pw" column="pw" />
 	</resultMap>
-	
+
 	<select id="selectAll" resultMap="dtoRes">
-		<!-- resultClass is result type ex) varchar = String / varchar, number= DTO -->
+		<!-- resultClass is result type ex) varchar = String / varchar, number= 
+			DTO -->
 		select * from test
 	</select>
-	
-		<select id="selectId" resultClass="String">
-		<!-- resultClass is result type ex) varchar = String / varchar, number= DTO -->
-		select id from test
+
+	<select id="selectId" resultClass="dto" parameterClass="String"> <!-- parameterClass is #id# fulling. ex) varchar = String / varchar, number= 
+			DTO -->
+		<!-- resultClass is result type ex) varchar = String / varchar, number= 
+			DTO -->
+		select * from test where id = #id# <!-- #id# like a SQL = ? -->
 	</select>
 
+	<insert id="insert" parameterClass="dto">
+		insert into test values (#id#, #pw#, #age#, sysdate)
+	</insert>
 </sqlMap>
 

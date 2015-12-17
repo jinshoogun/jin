@@ -3,6 +3,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     
     
-    <c:forEach var ="id" items= "${list}">
-    ${id}<br />
-    </c:forEach> 
+
+    ${dto.id}, ${dto.pw}, ${dto.age}, ${dto.reg}
+    

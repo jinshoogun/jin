@@ -9,6 +9,7 @@ import com.ibatis.sqlmap.client.SqlMapClientBuilder;
 
 public class IbatisAction {
 	private List list;
+	private TestDTO dto;
 	public String execute() throws Exception {
 		Reader reader = Resources.getResourceAsReader("sqlMapConfig.xml");
 		SqlMapClient sqlMap = SqlMapClientBuilder.buildSqlMapClient(reader);		
@@ -21,7 +22,7 @@ public class IbatisAction {
 		
 		//select * from 사용할시
 		//sqlMap.queryForList("selectAll");// - 결과 리스트로 리턴
-		list = sqlMap.queryForList("selectId");
+		dto = (TestDTO)sqlMap.queryForObject("selectId", "obj140");
 		
 		//String str = (String)sqlMap.queryForObject("selectAll");
 		//Object라도 타입이  String형이므로 String으로 가지고온다
@@ -29,8 +30,15 @@ public class IbatisAction {
 		
 		return "success";
 	}
+	
+	
 	public List getList(){
 		return list;
 	}
+	public TestDTO getDTO(){
+		return dto;
+	}
+	
+	
 	
 }

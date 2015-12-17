@@ -3,8 +3,8 @@
    "-//Apache Softward Foundation//DTD Struts Configuration 2.0// EN"
    "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-	<!--  <constant name="struts.multipart.saveDir" value="/tmp" />
-	<package name="test" extends="struts-default">
+	<constant name="struts.multipart.saveDir" value="/tmp" />
+	<package name="test1" extends="struts-default">
 		<interceptors>
 			<interceptor name="test" class="test.interceptor.TestInterceptor" />
 			<interceptor name="dao" class="test.interceptor.DAOInterceptor"></interceptor>
@@ -62,7 +62,7 @@
 			<result name="login">/interceptor/login2/login.jsp</result>
 		</action>
 		<action name="a" class="test.action.AAction">
-			<result type="redirects-action">b</result>
+			<result type="redirect-action">b</result>
 		</action>
 		<action name="b" class="test.action.BAction">
 			<result>/12_16/b.jsp</result>
@@ -70,14 +70,19 @@
 		<action name="download" class="test.action.DownloadAction">
 			<result type="stream">
 				<param name="inputName">inputStream</param>
-				<param name="contentDisposition">attachment; filename=${fileName}</param>
+				<param name="contentDisposition">attachment;filename=${fileName}</param>
 				<param name="bufferSize">10240000</param>
 			</result>
 		</action>
-	</package>-->
+	</package>
 	<package name="test" extends="struts-default">
-	<action name="select" class ="test.action.IbatisAction">
-	<result>/12_17/list.jsp</result>
-	</action>
+		<action name="select" class="test.action.IbatisAction">
+			<result>/12_17/list.jsp</result>
+		</action>
+		<action name="insert" class="test.action.InsertAction">
+			<interceptor-ref name="modelDriven"></interceptor-ref>
+			<interceptor-ref name="params"></interceptor-ref>
+			<result>/12_17/result.jsp</result>
+		</action>
 	</package>
 </struts>
