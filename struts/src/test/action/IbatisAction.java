@@ -21,7 +21,7 @@ public class IbatisAction {
 		
 		//select * from 사용할시
 		//sqlMap.queryForList("selectAll");// - 결과 리스트로 리턴
-		list = sqlMap.queryForList("selectAll");
+		list = sqlMap.queryForList("selectId");
 		
 		//String str = (String)sqlMap.queryForObject("selectAll");
 		//Object라도 타입이  String형이므로 String으로 가지고온다
