@@ -76,10 +76,15 @@
 		</action>
 	</package>
 	<package name="test" extends="struts-default">
+		<interceptors>
+			<interceptor name="ibatis" class="test.interceptor.IbatisInterceptor"></interceptor>
+		</interceptors>
 		<action name="select" class="test.action.IbatisAction">
+			<interceptor-ref name="ibatis" />
 			<result>/12_17/list.jsp</result>
 		</action>
 		<action name="insert" class="test.action.InsertAction">
+			<interceptor-ref name="ibatis" />
 			<interceptor-ref name="modelDriven"></interceptor-ref>
 			<interceptor-ref name="params"></interceptor-ref>
 			<result>/12_17/result.jsp</result>
