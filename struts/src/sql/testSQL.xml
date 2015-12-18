@@ -24,5 +24,12 @@
 	<insert id="insert" parameterClass="dto">
 		insert into test values (#id#, #pw#, #age#, sysdate)
 	</insert>
+	
+	<select id ="userCheck" resultClass="String" parameterClass="HashMap"><!-- used to haspMap  -->
+	    select id from test where id = #id# and pw = #pw#
+	</select>
+	<select id = "memberCheck" resultClass = "String" parameterClass = "HashMap">
+	     select id from member where id = #id# and passwd = #passwd#
+	</select>
 </sqlMap>
 
