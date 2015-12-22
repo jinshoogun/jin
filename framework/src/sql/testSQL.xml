@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC '-//ibatis.apache.org//DTD Sql Map 2.0//EN' 
+						'http://ibatis.apache.org/dtd/sql-map-2.dtd'>
+<sqlMap>
+<!-- <select id = "selectAll" resultClass="String"> //get of value checking select id from test </select> -->
+	<typeAlias alias="dto" type="test.bean.DTO" />
+
+	<resultMap id="dtoRes" class="dto">
+		<result property="id" column="id"></result>
+		<result property="pw" column="pw"></result>
+	</resultMap>
+
+	<select id="selectAll" resultMap="dtoRes">
+		select * from test
+	</select>
+	
+	
+	<select id="selectId" resultClass="dto" parameterClass="String">
+	</select>
+											
+	<insert id="insert" parameterClass="dto" >
+		insert into test values(#id#,#pw#,#age#,sysdate)
+	</insert>	
+	
+	<select id="userCheck" resultClass="String" parameterClass="HashMap">
+		select id from test where id = #id# and pw= #pw#
+	</select>
+										
+</sqlMap>
+
