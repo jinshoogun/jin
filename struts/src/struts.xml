@@ -113,4 +113,5 @@
      <result>/member1/logout.jsp</result>
      </action>
      </package>
+     <package name=""></package>
 </struts>
