@@ -89,29 +89,40 @@
 			<interceptor-ref name="params" />
 			<result>/12_17/result.jsp</result>
 		</action>
-		<action name="LoginPro" class = "test.action.LoginProAction">
-		<interceptor-ref name="ibatis" />
-		<interceptor-ref name="servletConfig" />
-		<interceptor-ref name="params" />
-		<result>/12_17/loginPro.jsp</result>
+		<action name="LoginPro" class="test.action.LoginProAction">
+			<interceptor-ref name="ibatis" />
+			<interceptor-ref name="servletConfig" />
+			<interceptor-ref name="params" />
+			<result>/12_17/loginPro.jsp</result>
 		</action>
 	</package>
-	<package name ="member" extends="struts-default">
-     <interceptors>
-     <interceptor name="ibatis" class="test.interceptor.IbatisInterceptor" />
-     </interceptors>
-     <action name = "LoginPro" class = "member1.action.LoginProAction">
-     <interceptor-ref name="ibatis" />
-     <interceptor-ref name="servletConfig" />
-     <interceptor-ref name="params" />
-     <result>/member1/loginPro.jsp</result>
-     </action>
-     <action name = "LoginOut" class = "member1.action.logoutAction">
-     <interceptor-ref name="ibatis" />
-     <interceptor-ref name="servletConfig" />
-     <interceptor-ref name="params" />
-     <result>/member1/logout.jsp</result>
-     </action>
-     </package>
-     <package name=""></package>
+	<package name="member" extends="struts-default">
+		<interceptors>
+			<interceptor name="ibatis" class="test.interceptor.IbatisInterceptor" />
+		</interceptors>
+		<action name="LoginPro" class="member1.action.LoginProAction">
+			<interceptor-ref name="ibatis" />
+			<interceptor-ref name="servletConfig" />
+			<interceptor-ref name="params" />
+			<result>/member1/loginPro.jsp</result>
+		</action>
+		<action name="LoginOut" class="member1.action.logoutAction">
+			<interceptor-ref name="ibatis" />
+			<interceptor-ref name="servletConfig" />
+			<interceptor-ref name="params" />
+			<result>/member1/logout.jsp</result>
+		</action>
+	</package>
+
+	<package name="admin" extends="struts-default">
+		<interceptors>
+			<interceptor name="Ibatis" class="main.interceptor.IbatisInterceptor" />
+		</interceptors>
+		<action name="AdminProc" class="admin.action.LoginProAction">
+			<interceptor-ref name="Ibatis" />
+			<interceptor-ref name="servletConfig" />
+			<interceptor-ref name="params" />
+			<result>/final/admin/main.jsp</result>
+		</action>
+	</package>
 </struts>

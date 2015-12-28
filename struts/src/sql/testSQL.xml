@@ -9,27 +9,33 @@
 	</resultMap>
 
 	<select id="selectAll" resultMap="dtoRes">
-		<!-- resultClass is result type ex) varchar = String / varchar, number= 
-			DTO -->
 		select * from test
 	</select>
 
 	<select id="selectId" resultClass="dto" parameterClass="String"> <!-- parameterClass is #id# fulling. ex) varchar = String / varchar, number= 
 			DTO -->
-		<!-- resultClass is result type ex) varchar = String / varchar, number= 
-			DTO -->
-		select * from test where id = #id# <!-- #id# like a SQL = ? -->
+		select * from test where id = #id#
 	</select>
 
 	<insert id="insert" parameterClass="dto">
-		insert into test values (#id#, #pw#, #age#, sysdate)
+		insert into test values
+		(#id#, #pw#, #age#, sysdate)
 	</insert>
-	
-	<select id ="userCheck" resultClass="String" parameterClass="HashMap"><!-- used to haspMap  -->
-	    select id from test where id = #id# and pw = #pw#
+
+	<select id="userCheck" resultClass="String" parameterClass="HashMap"><!-- used 
+			to haspMap -->
+		select id from test where id = #id# and pw = #pw#
 	</select>
-	<select id = "memberCheck" resultClass = "String" parameterClass = "HashMap">
-	     select id from member where id = #id# and passwd = #passwd#
+	<select id="memberCheck" resultClass="String" parameterClass="HashMap">
+		select id from member where id = #id# and passwd = #passwd#
 	</select>
+	<resultMap id="AdminDtoRes" class="dto.action.AdminDTO">
+		<result property="a_id" column="a_id" />
+		<result property="a_password" column="a_password" />
+	</resultMap>
+	<select id="adminCheck" resultClass="String" parameterClass="HashMap">
+		select a_id from Manager where a_id = #a_id# and a_password = #a_password#
+	</select>
+
 </sqlMap>
 
